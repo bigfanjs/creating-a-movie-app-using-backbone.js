@@ -2,8 +2,8 @@ import gulp from 'gulp';
 
 import bundle from './tasks/bundle';
 import browserSync from './tasks/browser-sync';
-import nodemom from './tasks/nodemon';
-import test_browser from './tasks/test_browser';
+import nodemon from './tasks/nodemon';
+import test_browser from './tasks/test-browser';
 
 gulp.task('bundle', bundle());
 gulp.task('nodemon', nodemon());
