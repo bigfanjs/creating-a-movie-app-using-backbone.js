@@ -1,6 +1,6 @@
 # Building A Large-scale Movie Application.
 
-## Technologies:
+## Technologies/tools:
   * BackboneJS for the Application Structure which provides the separation
     of concerns using Model-View-Controller architectural desigh pattern.
   * GulpJS for automating my application development process.
