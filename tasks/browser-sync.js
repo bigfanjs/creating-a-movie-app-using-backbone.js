@@ -4,7 +4,7 @@ export const bs = browserSync.create();
 export default function () {
   return () => {
     bs.init({
-      baseDir: 'public/src/javascripts/',
+      baseDir: './public/javascripts/',
       files: [
         './apps/**/*.js',
         './lib/**/*.js',

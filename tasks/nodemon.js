@@ -9,7 +9,7 @@ export default function () {
     let called = false;
 
     nodemon({
-      script: 'server.js',
+      script: '../build/server.js',
       ignore: ['gulpfile.babel.js', '.babelrc', '/node_modules/']
     })
     .on('start', function () {
