@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: 'public/src/javascripts',
+    basePath: 'public/javascripts',
 
 
     // frameworks to use
