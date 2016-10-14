@@ -1,4 +1,4 @@
-import nodemon from 'nodemon';
+import nodemon from 'gulp-nodemon';
 
 import { bs } from './browser-sync';
 
@@ -8,9 +8,11 @@ export default function () {
   return cb => {
     let called = false;
 
-    nodemon({
+    return nodemon({
       script: '../build/server.js',
-      ignore: ['gulpfile.babel.js', '.babelrc', '/node_modules/']
+      ignore: ['gulpfile.babel.js', '.babelrc', '/node_modules/'],
+      tasks: ['node-babel'],
+      watch: 'lib'
     })
     .on('start', function () {
       if ( !called ) {
@@ -21,7 +23,7 @@ export default function () {
     .on('restart', function () {
       setTimeout(() => {
         reload({ stream: false });
-      }, 1000);
+      });
     });
   };
 }

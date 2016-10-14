@@ -30,8 +30,8 @@ export default function () {
       main = 'public/javascripts/main.js',
       bundler = watchify(
         browserify(main, { debug: true })
-        .transform('babelify', { presets: ['es2015'] })
-        .transform('pugify')
+          .transform('babelify', { presets: ['es2015'] })
+          .transform('pugify')
       );
 
     bundle_js( bundler );
