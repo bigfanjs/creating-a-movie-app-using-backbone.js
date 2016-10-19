@@ -3,7 +3,7 @@ import Backbone from 'backbone';
 export default Backbone.Model.extend({
   urlRoot: 'api/movies',
   defaults: {
-    name: '',
+    title: '',
     type: '',
     runningTime: '',
     releaseDate: '',
@@ -16,6 +16,6 @@ export default Backbone.Model.extend({
     language: '',
     cast: [{actor: '', character: '', avatar: null}],
     starring: [{actor: '', character: '', avatar: null}],
-    avatar: null
+    cover: null
   }
 });
