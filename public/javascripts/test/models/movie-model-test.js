@@ -10,7 +10,7 @@ describe('Movie Model', function () {
     const movieModel = new MovieModel();
 
     it('should have the default values', function () {
-      assert.equal(movieModel.get('name'), '');
+      assert.equal(movieModel.get('title'), '');
       assert.equal(movieModel.get('type'), '');
       assert.equal(movieModel.get('runningTime'), '');
       assert.equal(movieModel.get('releaseDate'), '');
@@ -21,7 +21,7 @@ describe('Movie Model', function () {
       assert.equal(movieModel.get('narrator'), '');
       assert.equal(movieModel.get('country'), '');
       assert.equal(movieModel.get('language'), '');
-      assert.equal(movieModel.get('avatar'), null);
+      assert.equal(movieModel.get('cover'), null);
       assert.deepEqual(
         movieModel.get('cast')[ 0 ],
         { actor: '', character: '', avatar: null }
