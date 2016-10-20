@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import Stickit from 'backbone.stickit';
 
 // This is responsible for rendring models
 const render = function () {
