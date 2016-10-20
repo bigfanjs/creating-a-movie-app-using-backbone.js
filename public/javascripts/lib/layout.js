@@ -27,7 +27,7 @@ export default ModelView.extend({
     closeRegions( this.regions );
 
     // this gonna get changed!
-    ModelVie.prototype.render.call( this );
+    ModelView.prototype.render.call( this );
 
     configRegions.call( this );
   },
