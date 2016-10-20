@@ -1,6 +1,6 @@
 import Backbone from 'backbone';
 import bind from 'lodash/bind';
-import forEch from 'lodash/forEch';
+import forEch from 'lodash/forEach';
 import isFunction from 'lodash/isFunction';
 
 const
@@ -8,13 +8,13 @@ const
     Renders each new model added to
     the collection.
   */
-  modelAdded = function ( childViews, model ) {
+  modelAdded = function ( model ) {
     const view = renderModel( childViews, model );
 
     // let the rendered model appears to the end user.
     this.$el.append( view.el );
   },
-  modelRemoved = function ( childViews, model ) {
+  modelRemoved = function ( model ) {
     const view = childViews[ model.cid ];
     closeChildView( childViews, view );
   },
@@ -24,7 +24,7 @@ const
     Which is added to a list of child views
     and is registered for all events.
   */
-  renderModel = function ( childViews, model ) {
+  renderModel = function ( model ) {
     const view = new this.ItemView({ model });
 
     childViews[ model.cid ] = view;
@@ -37,12 +37,12 @@ const
 
     return view;
   },
-  closeChildViews = function ( childViews ) {
+  closeChildViews = function () {
     childViews.forEach(view => {
       closeChildView( view, childViews );
     });
   },
-  closeChildView = function ( view, childViews ) {
+  closeChildView = function ( view ) {
     if ( typeof view === 'undefined' ) {
       throw TypeError('no view is specified');
     }
@@ -56,39 +56,35 @@ const
     delete childViews[ view.model.cid ];
   };
 
-export default Backbone.View.extend({
-  initialize() {
-    const childViews = this.childViews = {};
+const
+  CollectionView = Backbone.View.extend({
+    initialize() {
+      const childViews = this.childViews = {};
 
-    this.listenTo(
-      this.collection,
-      'add',
-      bind( modelAdded, this, childViews)
-    );
-    this.listenTo(
-      this.collection,
-      'remove',
-      bind(modelRemoved, this, childViews)
-    );
-    this.listenTo(this.collection, 'reset', this.render);
-  },
-  render() {
-    var $html;
+      this.listenTo( this.collection, 'add', bind( modelAdded, this ));
+      this.listenTo( this.collection, 'remove', bind(modelRemoved, this));
+      this.listenTo(this.collection, 'reset', this.render);
+    },
+    render() {
+      var $html;
 
-    this.closeChildViews( this.childViews );
+      this.closeChildViews( this.childViews );
 
-    $html = this.collection.slice(0).map(model => {
-      const view = renderModel.call( this, model );
+      $html = this.collection.slice(0).map(model => {
+        const view = renderModel.call( this, model );
 
-      return view.$el;
-    });
+        return view.$el;
+      });
 
-    this.$el.html( $html );
+      this.$el.html( $html );
 
-    return this;
-  },
-  remove() {
-    Backbone.View.prototype.remove.call( this );
-    closeChildViews( this.childViews );
-  }
-});
+      return this;
+    },
+    remove() {
+      Backbone.View.prototype.remove.call( this );
+      closeChildViews( this.childViews );
+    }
+  }),
+  chidlviews = CollectionView.prototype.childViews;
+
+export default CollectionView;
