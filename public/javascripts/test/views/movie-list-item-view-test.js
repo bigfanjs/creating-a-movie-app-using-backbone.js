@@ -7,9 +7,13 @@ describe('Movie List Item View', function () {
   beforeEach(function () {
     // seting a fake model.
     this.model = new Backbone.Model({
-      name: 'someName',
+      title: 'someTitle',
       type: 'funny',
-      runningTime: '2h30, min'
+      runningTime: '2h30, min',
+      cover: {
+        path: 'default.jpg',
+        name: 'default'
+      }
     });
   });
 
@@ -25,8 +29,7 @@ describe('Movie List Item View', function () {
     const view = new MovieListItemView({ model: this.model });
 
     view.render();
-    assert.include(view.$el.html(), this.model.get('name'));
-    assert.include(view.$el.html(), this.model.get('type'));
-    assert.include(view.$el.html(), this.model.get('runningTime'));
+    assert.include(view.$el.html(), this.model.get('title'));
+    assert.include(view.$el.html(), this.model.get('cover').path);
   });
 });
