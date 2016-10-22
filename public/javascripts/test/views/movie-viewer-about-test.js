@@ -20,6 +20,6 @@ describe('Movie Viewer About', function () {
         actors: '.actor-list-container'
       };
 
-    assert.deepEqaul( view.regions, regions );
+    assert.deepEqual( view.regions, regions );
   });
 });
