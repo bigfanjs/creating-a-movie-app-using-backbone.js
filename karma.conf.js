@@ -38,6 +38,7 @@ module.exports = function(config) {
     // configuring the browserify preprocessor.
     browserify: {
         debug: true,
+        plugin: ['proxyquireify/plugin'],
         transform: [['babelify', { presets: ['es2015'] }], 'pugify']
     },
 
