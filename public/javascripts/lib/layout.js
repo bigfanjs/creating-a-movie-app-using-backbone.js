@@ -39,11 +39,11 @@ export default ModelView.extend({
       throw TypeError('No name property passed!');
     }
 
-    if ( !regions.hasOwnProperty( name ) ) {
+    if ( !this.regions.hasOwnProperty( name ) ) {
       throw TypeError(`${ name } region doesn't exist in the layout!`);
     }
 
-    region = regions[ name ];
+    region = this.regions[ name ];
 
     return region;
   }
