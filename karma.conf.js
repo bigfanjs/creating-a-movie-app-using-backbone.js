@@ -1,6 +1,5 @@
 // Karma configuration
 // Generated on Tue Oct 11 2016 19:14:31 GMT+0100 (Morocco Daylight Time)
-
 module.exports = function(config) {
   config.set({
 
@@ -16,8 +15,6 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         '../stylesheets/vendors/mocha.css',
-        'lib/**/*.js',
-        'apps/**/*.js',
         'test/**/*.js'
     ],
 
@@ -30,8 +27,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'lib/**/*.js': ['browserify'],
-        'apps/**/*.js': ['browserify'],
         'test/**/*.js': ['browserify']
     },
 
@@ -39,7 +34,11 @@ module.exports = function(config) {
     browserify: {
         debug: true,
         plugin: ['proxyquireify/plugin'],
-        transform: [['babelify', { presets: ['es2015'] }], 'pugify']
+        transform: [['babelify', {
+            presets: ['es2015'],
+            plugins: ['transform-runtime']
+        }], 'pugify'],
+        extensions: ['.js', '.pug']
     },
 
     // test results reporter to use
