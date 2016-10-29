@@ -35,15 +35,17 @@ export default ModelView.extend({
   getRegion( name ) {
     var region;
 
+    const regions = this._regions || {};
+
     if ( name === null ) {
       throw TypeError('No name property passed!');
     }
 
-    if ( !this.regions.hasOwnProperty( name ) ) {
+    if ( !regions.hasOwnProperty( name ) ) {
       throw TypeError(`${ name } region doesn't exist in the layout!`);
     }
 
-    region = this.regions[ name ];
+    region = regions[ name ];
 
     return region;
   }
