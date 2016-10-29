@@ -39,6 +39,7 @@
     "mocha": "3.0.2",
     "karma-mocha": "1.1.1",
     "karma-chai": "0.1.0",
+    "karma-browserify": "5.1.0",
     "nodemon": "1.10.2",
     "wathcify": "3.7.0",
     "gulp": "3.9.1",
