@@ -13,7 +13,7 @@ module.exports = Layout.extend({
   },
   template: template,
   regions: {
-    filterBar: '.movie-list-filter-bar',
+    filters: '.movie-list-filter-bar',
     movieList: '.movie-list'
   }
 });
