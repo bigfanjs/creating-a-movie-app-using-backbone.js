@@ -1,8 +1,4 @@
-/*
-  We better use CommonJS modules for testing controllers
-  since proxyquireify doesn't work properly with ES6
-  modules.
-*/
+/* Proxyquireify forces us to write CommonJS modules */
 
 const
   Backbone = require('backbone'),
