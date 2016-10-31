@@ -8,7 +8,7 @@ const
 // requiring fake objects.
 const
   FakeRegion = require('./fakes/fake-region'),
-  FakeLayout = require('./fakes/fake-layout');
+  FakeLayout = require('./fakes/fake-list-layout');
 
 const assert = chai.assert;
 
