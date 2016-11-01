@@ -33,23 +33,22 @@ describe('Initiating the list controller', function () {
 });
 
 describe('viewing the list', function () {
+  var region;
+
   beforeEach(function () {
-    this.region = FakeRegion.setup();
+    region = FakeRegion.setup();
   });
 
   it('renders the list in the given region', function () {
     const
-      getRegion = function () {
-        return FakeRegion.setup();
-      },
-      stub = sinon.stub(FakeLayout.prototype, 'getRegion', getRegion),
-      movieList = MovieList.setup({ region: this.region });
+      getRegion = () => FakeRegion.setup(),
+      stub = sinon.stub(FakeLayout.prototype, 'getRegion', getRegion);
 
     // initializing the tested behavior.
-    movieList.view();
+    MovieList.setup({ region }).view();
 
     // making sure the layout is rendered in the given region.
-    assert.ok( this.region.stub.called );
+    assert.ok( region.stub.called );
 
     // making sure layout's getRegion() was called twice.
     assert.ok( stub.calledTwice );
@@ -71,17 +70,24 @@ describe('viewing the list', function () {
 });
 
 describe('removing the list', function () {
+  var region, remove, movieList;
+
   beforeEach(function () {
-    this.region = FakeRegion.setup();
+    region = FakeRegion.setup();
+    remove = sinon.spy(region, 'remove');
   });
 
   it('has to destroy the entire region', function () {
-    const
-      remove = sinon.spy(this.region, 'remove'),
-      movieList = MovieList.setup({ region: this.region });
-
-    movieList.destroy();
+    MovieList.setup({ region }).destroy();
 
     assert.ok( remove.called );
+  });
+
+  it('has to stop litening to the given region\'s events', function () {
+    const stopListening = sinon.spy();
+
+    MovieList.setup({ region, stopListening }).destroy();
+
+    assert.ok( stopListening.calledOnce );
   });
 });
