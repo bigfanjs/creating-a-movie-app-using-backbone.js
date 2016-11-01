@@ -7,17 +7,6 @@ const
   MovieListItemView = require('../views/list/movie-list-item-view'),
   MovieListView = require('../views/list/movie-list-view');
 
-const deleteMovie = function ( view, movie ) {
-  movie.destroy({
-    success: function () {
-      console.log('Movie deleted');
-    },
-    error: function () {
-      console.log('deleting movie [error]');
-    }
-  });
-};
-
 module.exports = {
   setup: function (options = {}) {
     const ctrl = Object.create( this );
@@ -35,8 +24,6 @@ module.exports = {
     this.region.show( layout );
     layout.getRegion('filters').show( filter );
     layout.getRegion('list').show( list );
-
-    this.listenTo(list, 'item:delete:movie', deleteMovie);
   },
   destroy: function () {
     this.region.remove();
