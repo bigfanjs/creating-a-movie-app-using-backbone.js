@@ -9,12 +9,16 @@ export default Backbone.Router.extend({
   routes: {
     'movies': 'displayMovies',
     'movies/page/:page': 'displayMovies',
-    'movies/view/:id': 'viewMovie'
+    'movies/view/:id': 'viewMovie',
+    '*default': 'defaultRoute'
   },
   displayMovies: function ( id = 1 ) {
     this.app.viewList(id > 0 ? id : 1);
   },
   viewMovie: function ( id ) {
     this.app.viewMovie( id );
+  },
+  defaultRoute() {
+    this.navigate('movies', true);
   }
 });
