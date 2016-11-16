@@ -7,14 +7,14 @@ exports.form = function ( req, res ) {
 };
 
 exports.submit = function ( req, res, next ) {
-  const admine = req.body.admine;
+  const body = req.body;
 
-  Admine.authenticate(admine.name, admine.pass, (err, user) => {
+  Admine.authenticate(body.name, body.pass, (err, admine) => {
     if ( err ) return next( err );
 
-    if ( user ) {
-      req.session.uid = user.id;
-      res.redirect('/admine/movies/');
+    if ( admine ) {
+      req.session.uid = admine.id;
+      res.redirect('/admin/movies/');
     } else {
       res.error('Sorry, Invalid Credantials!');
       res.redirect('back');
