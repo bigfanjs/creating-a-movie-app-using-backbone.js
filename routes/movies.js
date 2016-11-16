@@ -18,7 +18,7 @@ exports.viewMovie = function ( req, res, next ) {
   });
 };
 
-exports.delete = function ( req, res, next ) {
+exports.deleteMovie = function ( req, res, next ) {
   Movie.remove({ _id: req.params.id }, ( err, movie ) => {
     if ( err ) return next( err );
 
