@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongoddb://127.0.0.1/admines');
+mongoose.createConnection('mongodb://127.0.0.1/movies');
 
 const schema = new mongoose.Schema({
   title: String,
