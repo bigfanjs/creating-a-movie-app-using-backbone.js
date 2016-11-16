@@ -12,7 +12,7 @@ export default function () {
       script: '../build/server.js',
       ignore: ['gulpfile.babel.js', '.babelrc', '/node_modules/'],
       tasks: ['node-babel'],
-      watch: 'lib'
+      watch: ['server.js', './lib/**/*.js']
     })
     .on('start', function () {
       if ( !called ) {

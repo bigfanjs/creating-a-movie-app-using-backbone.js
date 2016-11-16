@@ -25,5 +25,5 @@ gulp.task('watch', ['html-min', 'css-min'], function () {
 });
 
 gulp.task('default', cb => {
-  runSequence('clean', ['watch', 'browser-sync', 'bundle'], cb);
+  runSequence('clean', ['watch', /*'browser-sync',*/ 'nodemon'], cb);
 });
