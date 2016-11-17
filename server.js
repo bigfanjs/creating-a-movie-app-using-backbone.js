@@ -20,11 +20,15 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'jade');
 
-app.use(favicon('./public/favicon.ico'));
+// app.use(favicon('./public/favicon.ico'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser('What should I say?'));
-app.use(session());
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: 'my little cat'
+}));
 app.use(express.static(path.join(__dirname, './public')));
 app.use('/admin/movies', movies.authenticate);
 
@@ -32,7 +36,6 @@ app.get('/api/movies/', movies.showMovies);
 app.get('/api/movies/:id', movies.viewMovie);
 
 // administration:
-app.get('/admin/login/', login.form);
 app.post('/admin/login/', login.submit);
 app.get('/admin/logout/', login.logout);
 
