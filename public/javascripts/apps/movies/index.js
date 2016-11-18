@@ -1,10 +1,9 @@
-const
-  MovieModel = require('./models/movie-model'),
-  MovieCollection = require('./collections/movie-collection'),
-  MovieList = require('./controllers/list'),
-  MovieViewer = require('./controllers/viewer'),
-  isFunction = require('lodash/isFunction'),
-  bind = require('lodash/bind');
+import MovieModel from './models/movie-model';
+import MovieCollection from './collections/movie-collection';
+import MovieList from './controllers/list';
+import MovieViewer from './controllers/viewer';
+import isFunction from 'lodash/isFunction';
+import bind from 'lodash/bind';
 
 var currCtrl;
 
@@ -37,7 +36,7 @@ module.exports = {
   },
   viewList: function () {
     const
-      success = colletion => {
+      success = collection => {
         const list = this.lanch( MovieList );
 
         list.view( collection );
