@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
-import Region from 'region';
+import Region from './lib/region';
 import isFunction from 'lodash/isFunction';
 import MoviesRouter from './apps/movies/router';
 
