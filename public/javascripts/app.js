@@ -13,11 +13,11 @@ const
 var app = null;
 
 export default {
-  setup: function ( options ) {
+  region: Region.setup({el: '#main'}),
+  setup: function (options = {}) {
     this.router = new MoviesRouter();
-    this.region = Region.setup({el: '#main'});
 
-    Object.assign(this, Backbone.Events);
+    assign(this, Backbone.Events, options);
 
     Backbone.history.start();
   },
