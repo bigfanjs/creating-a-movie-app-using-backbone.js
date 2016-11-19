@@ -30,7 +30,7 @@ module.exports = {
 
     Object.assign(app, options);
 
-    app.lanch = bind(controller, null, app.region);
+    app.lanch = bind(controller, null, options.region);
 
     return app;
   },
