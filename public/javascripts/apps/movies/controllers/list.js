@@ -1,11 +1,17 @@
 /* Proxyquireify forces us to write CommonJS modules */
 
-const
+/*const
   Backbone = require('backbone'),
   MovieListLayout = require('../views/list/movie-list-layout'),
   MovieListFilterBar = require('../views/list/movie-list-filter-bar'),
   MovieListItemView = require('../views/list/movie-list-item-view'),
-  MovieListView = require('../views/list/movie-list-view');
+  MovieListView = require('../views/list/movie-list-view');*/
+
+import Backbone from 'backbone';
+import MovieListLayout from '../views/list/movie-list-layout';
+import MovieListFilterBar from '../views/list/movie-list-filter-bar';
+import MovieListItemView from '../views/list/movie-list-item-view';
+import MovieListView from '../views/list/movie-list-view';
 
 module.exports = {
   setup: function (options = {}) {
