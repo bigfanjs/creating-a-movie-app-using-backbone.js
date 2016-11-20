@@ -17,7 +17,7 @@ const
       this._regions = {};
     }
 
-    forEach(this.regions, ( name, value ) => {
+    forEach(this.regions, ( value, name ) => {
       this._regions[ name ] = Region.setup({ elem: $( value ) });
     });
   };
@@ -30,6 +30,8 @@ export default ModelView.extend({
     ModelView.prototype.render.call( this );
 
     configRegions.call( this );
+
+    return this;
   },
   // gets the region by name.
   getRegion( name ) {
