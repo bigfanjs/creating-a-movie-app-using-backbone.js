@@ -15,7 +15,7 @@ const
       this.$elem = $( this.elem );
     }
 
-    this.$elem.html( view.render().elem );
+    this.$elem.html( view.render().el );
   };
 
 export default {
