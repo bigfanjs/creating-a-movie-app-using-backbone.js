@@ -1,14 +1,30 @@
-// a placeholder template.
-div.well
-  form#filter-bar
-    div.form-group
-      label(for="type") Type
-      select.form-control#type
-        option(for="funny") Funny
-        option(for="herror") Herror
-        option(for="comedy") Comedy
-    div.form-group
-      input.form-control(placeholder="Movie name...")
-      button.btn.btn-default#look-up Search
-    div.form-group
-      input(class="btn btn-primary" type="submit" value="Filter")
+#filter-bar.col-xs-3.well
+  h3 BROWSE
+  form(role="search")
+    label(for="search") Search by title
+    .input-group.add-on
+      input#search.form-control(type="text" placeholder="movie title" name="filter")
+      .input-group-btn
+        button.btn.btn-default(type="submit")
+          i.glyphicon.glyphicon-search
+    br
+    .form-group
+      label(for="type") Choose a movie type:
+      select#type.form-control(multiple)
+        option(value="funny") Funny
+        option(value="humar") Humar
+    .form-group
+      label(for="sort") Sort By:
+      select#order.form-control
+        option(value="")
+        option(value="releaseYear") Release Year
+        option(value="popularity") Popularity
+    label(for="year")
+      #year.row
+        .col-sm-2: p 2016
+        .col-sm-2: p 2015
+        .col-sm-2: p 2014
+        .col-sm-2: p 2013
+        .col-sm-2: p 2012
+        .col-sm-2: p 2011
+        .col-sm-2: p 2010
