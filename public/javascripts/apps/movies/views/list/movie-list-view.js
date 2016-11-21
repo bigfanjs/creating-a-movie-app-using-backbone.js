@@ -5,6 +5,6 @@ export default CollectionView.extend({
   initialize( options ) {
     CollectionView.prototype.initialize.call( this, options );
   },
-  className: 'movie-list-view',
+  className: 'movie-list-view col-xs-8 panel panel-primary',
   MovieItem: ItemView
 });
