@@ -5,7 +5,7 @@ export default Layout.extend({
   template,
   className: 'row page-container',
   regions: {
-    filters: '.filter-bar-container',
+    filters: '.movie-filter-bar',
     list: '.movie-list-view'
   }
 });
