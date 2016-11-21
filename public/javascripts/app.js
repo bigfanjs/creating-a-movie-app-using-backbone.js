@@ -13,7 +13,7 @@ const
 var app = null;
 
 export default {
-  region: Region.setup({el: '#main'}),
+  region: Region.setup({elem: '#main'}),
   setup: function (options = {}) {
     this.router = new MoviesRouter();
 
