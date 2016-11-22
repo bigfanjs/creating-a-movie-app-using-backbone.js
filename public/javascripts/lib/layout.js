@@ -18,7 +18,7 @@ const
     }
 
     forEach(this.regions, ( value, name ) => {
-      this._regions[ name ] = Region.setup({ elem: $( value ) });
+      this._regions[ name ] = Region.setup({ elem: value });
     });
   };
 
@@ -49,6 +49,7 @@ export default ModelView.extend({
 
     region = regions[ name ];
 
+    // console.log( region );
     return region;
   }
 });
