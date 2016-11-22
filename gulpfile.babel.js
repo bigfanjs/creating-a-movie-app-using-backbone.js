@@ -24,10 +24,10 @@ gulp.task('css-min', cssMin());
 gulp.task('fonts-copy', fontsCopy());
 
 gulp.task('watch', ['html-min', 'css-min', 'image-min', 'fonts-copy'], function () {
-  gulp.watch('./public/*.html', ['html-min']);
-  gulp.watch('./public/images/**/*.{jpg,png,gif,svg}', ['image-min']);
-  gulp.watch('./public/stylesheets/**/*.css', ['css-min']);
-  gulp.watch('./public/fonts/*', ['fonts-copy']);
+  gulp.watch('public/*.html', ['html-min']);
+  gulp.watch('public/images/**/*.{jpg,png,gif,svg}', ['image-min']);
+  gulp.watch('public/stylesheets/**/*.css', ['css-min']);
+  gulp.watch('public/fonts/*', ['fonts-copy']);
 });
 
 gulp.task('default', cb => {
