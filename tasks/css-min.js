@@ -5,7 +5,6 @@ import concat from 'gulp-concat';
 
 export default function () {
   return () => {
-
     const f = filter([
       'bootstrap.min.js',
       'bootstrap-theme.min.js'        
