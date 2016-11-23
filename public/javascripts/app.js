@@ -19,7 +19,7 @@ export default {
 
     assign(this, Backbone.Events, options);
 
-    Backbone.history.start();
+    Backbone.history.start({pushState: true});
   },
   start: function ( App ) {
     // if the application is already defined.
