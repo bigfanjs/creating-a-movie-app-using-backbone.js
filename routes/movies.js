@@ -2,14 +2,6 @@
 
 const Movie = require('../models/movie');
 
-exports.authenticate = function (req, res, next) {
-  if (req.session.uid) {
-    return next();
-  } else {
-    res.redirect('/admin/login');
-  }
-};
-
 exports.showMovies = function ( req, res, next ) {
   Movie.find((err, movies) => {
     if ( err ) return next( err );
