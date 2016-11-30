@@ -2,13 +2,15 @@
 
 const Admin = require('../lib/admin');
 
-exports.submit = function ( req, res, next ) {
+function send404(res, err) {
+  res.status(404).end(err);
+}
+
+exports.submit = function (req, res) {
   const body = req.body;
 
   Admin.authenticate(body.name, body.pass, (err, admin) => {
-    if ( err ) {
-      return res.status(404).end(err);
-    }
+    if ( err ) { return send404(res, err); }
 
     if ( admin ) {
       req.session.uid = admin.id;
@@ -19,11 +21,9 @@ exports.submit = function ( req, res, next ) {
   });
 };
 
-exports.logout = function ( req, res ) {
+exports.logout = function (req, res) {
   req.session.destroy(err => {
-    if ( err ) {
-      return res.status(404).end(err);
-    }
+    if ( err ) { return send404(res, err); }
 
     res.status(402).json('session destroyed');
   });
