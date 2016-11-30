@@ -14,6 +14,10 @@ const
   movies = require('./routes/movies'),
   login = require('./routes/login');
 
+const
+  admin = require('./lib/middleware/admin'),
+  isAuthenticated = admin.isAuthenticated;
+
 // initiating express:
 const app = express();
 
@@ -30,20 +34,16 @@ app.use(session({
   secret: 'my little cat'
 }));
 app.use(express.static(path.join(__dirname, './public')));
-app.use('/admin/movies', movies.authenticate);
+
+// administration:
+app.get('/admin/logout/', login.logout);
+app.post('/admin/login/', login.submit);
 
 app.get('/api/movies/', movies.showMovies);
 app.get('/api/movies/:id', movies.viewMovie);
-
-// administration:
-app.post('/admin/login/', login.submit);
-app.get('/admin/logout/', login.logout);
-
-app.get('/admin/movies/:id', movies.viewMovie);
-app.get('/admin/movies/', movies.showMovies);
-app.post('/admin/movies/', movies.createMovie);
-app.put('/admin/movies/:id', movies.updateMovie);
-app.delete('/admin/movies/:id', movies.deleteMovie);
+app.post('/api/movies/', isAuthenticated(), movies.createMovie);
+app.put('/api/movies/:id', isAuthenticated(), movies.updateMovie);
+app.delete('/api/movies/:id', isAuthenticated(), movies.deleteMovie);
 
 app.listen(3000, function () {
   console.log('Listening on port 3000');
