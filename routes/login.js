@@ -1,31 +1,30 @@
 'use strict';
 
-const Admine = require('../lib/admine');
-
-exports.form = function ( req, res ) {
-  res.render('login', {title: 'Login'});
-};
+const Admin = require('../lib/admin');
 
 exports.submit = function ( req, res, next ) {
   const body = req.body;
 
-  Admine.authenticate(body.name, body.pass, (err, admine) => {
-    if ( err ) return next( err );
+  Admin.authenticate(body.name, body.pass, (err, admin) => {
+    if ( err ) {
+      return res.status(404).end(err);
+    }
 
-    if ( admine ) {
-      req.session.uid = admine.id;
-      res.redirect('/admin/movies/');
+    if ( admin ) {
+      req.session.uid = admin.id;
+      res.status(202).json( admin );
     } else {
-      res.error('Sorry, Invalid Credantials!');
-      res.redirect('back');
+      res.status(401).end('Sorry, Invalid Credantials!');
     }
   });
 };
 
 exports.logout = function ( req, res ) {
   req.session.destroy(err => {
-    if ( err ) throw err;
+    if ( err ) {
+      return res.status(404).end(err);
+    }
 
-    res.redirect('/');
+    res.status(402).json('session destroyed');
   });
 };
