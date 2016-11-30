@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const
-  config = require('../congig'),
+  config = require('../config'),
   db = mongoose.connect(config.databas.uri);
 
 const
