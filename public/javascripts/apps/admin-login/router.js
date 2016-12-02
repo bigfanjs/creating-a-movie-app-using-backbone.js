@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
 import App from '../../app';
-import loginApp from '';
+import loginApp from './index.js';
 
 export default Backbone.Router.extend({
   initialize: function () {
