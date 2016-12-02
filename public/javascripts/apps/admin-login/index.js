@@ -1,4 +1,4 @@
-import LoginForm from '../admin-login';
+import LoginForm from './views/admin-login';
 
 export default {
   setup: function ( options ) {
