@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const
   config = require('../config'),
-  db = mongoose.connect(config.databas.uri);
+  db = mongoose.connect(config.database.uri);
 
 const
   Admin = require('./admin')(mongoose, db),
