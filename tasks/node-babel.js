@@ -10,7 +10,8 @@ export default function () {
         'lib/**/*.js',
         'models/**/*.js',
         'routes/**/*.js',
-        'views/**/*.jade'
+        'views/**/*.jade',
+        'config/**/*.js'
       ], { base: '.' })
       // .pipe(sourcemasps.init())
       // .pipe(babel({ presets: ['es2015'] }))
