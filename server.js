@@ -35,6 +35,10 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, './public')));
 
+/* reroute all urls to the public/index.js to allow Backbone
+   to deal with routing.*/
+app.use('/movies', express.static(path.join(__dirname, './public')));
+
 // administration:
 app.get('/admin/logout/', login.logout);
 app.post('/admin/login/', login.submit);
