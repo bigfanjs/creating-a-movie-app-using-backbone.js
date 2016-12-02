@@ -2,62 +2,48 @@
 
 const
   path = require('path'),
-  express = require('express');
+  express = require('express'),
+  session = require('express-session'),
+  cookieParser = require('cookie-parser'),
+  bodyParser = require('body-parser'),
+  favicon = require('serve-favicon'),
+  logger = require('morgan');
 
-const tempData = [
-  { title: "Titanic",
-    type: 'Romantic',
-    runningTime: '123mins',
-    releaseYear: '1999',
-    cover: {
-      path: 'the-campaign.jpg',
-      name: 'avatar' },
-    story: 'some text for the movie\'s story' },
-  { title: "Death pool",
-    type: 'Action',
-    runningTime: '103mins',
-    releaseYear: '2014',
-    cover: {
-      path: 'the-campaign.jpg',
-      name: 'interstellar' },
-    story: 'some text for the movie\'s story' },
-  { title: "Showlin Soccer",
-    type: 'comidian',
-    runningTime: '132mins',
-    releaseYear: '2006',
-    cover: {
-      path: 'the-campaign.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "The campaign",
-    type: 'comidian',
-    runningTime: '132mins',
-    releaseYear: '2006',
-    cover: {
-      path: 'the-campaign.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' },
-  { title: "Where is the millers",
-    type: 'comidian',
-    runningTime: '132mins',
-    releaseYear: '2006',
-    cover: {
-      path: 'the-campaign.jpg',
-      name: 'the-campaign' },
-    story: 'some text for the movie\'s story' }
-];
+// requiring routes:
+const
+  movies = require('./routes/movies'),
+  login = require('./routes/login');
 
+const
+  admin = require('./lib/middleware/admin'),
+  isAuthenticated = admin.isAuthenticated;
+
+// initiating express:
 const app = express();
 
+app.set('port', process.env.PORT || 3000);
+app.set('view engine', 'jade');
+
+// app.use(favicon('./public/favicon.ico'));
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser('What should I say?'));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: 'my little cat'
+}));
 app.use(express.static(path.join(__dirname, './public')));
 
-app.get('/api/movies/', function (req, res, next) {
-  res.json( tempData );
-});
+// administration:
+app.get('/admin/logout/', login.logout);
+app.post('/admin/login/', login.submit);
 
-app.get('api/movies/:id', function (req, res, next) {
-  res.json( tempData[ 0 ] );
-});
+app.get('/api/movies/', movies.showMovies);
+app.get('/api/movies/:id', movies.viewMovie);
+app.post('/api/movies/', isAuthenticated(), movies.createMovie);
+app.put('/api/movies/:id', isAuthenticated(), movies.updateMovie);
+app.delete('/api/movies/:id', isAuthenticated(), movies.deleteMovie);
 
 app.listen(3000, function () {
   console.log('Listening on port 3000');
