@@ -1,6 +1,6 @@
 'use strict';
 
-const Movie = require('../models/movie');
+const Movie = require('../models')('movie');
 
 const send404 = function (res, err) {
   res.status(404).end(err);
