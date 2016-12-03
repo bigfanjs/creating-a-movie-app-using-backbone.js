@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import template from '../templates/login.pug';
+import template from '../templates/login-form.pug';
 
 export default Backbone.View.extend({
   template,
