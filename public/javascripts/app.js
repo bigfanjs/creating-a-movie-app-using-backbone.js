@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import Region from './lib/region';
 import isFunction from 'lodash/isFunction';
 import MoviesRouter from './apps/movies/router';
+import AdminRouter from './apps/admin-login/router';
 
 Backbone.Model.prototype.idAttribute = '_id';
 
@@ -15,6 +16,8 @@ var app = null;
 export default {
   region: Region.setup({elem: '#main'}),
   setup: function (options = {}) {
+    new AdminRouter();
+
     this.router = new MoviesRouter();
 
     assign(this, Backbone.Events, options);
