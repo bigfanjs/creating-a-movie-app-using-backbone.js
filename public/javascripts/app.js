@@ -16,9 +16,9 @@ var app = null;
 export default {
   region: Region.setup({elem: '#main'}),
   setup: function (options = {}) {
-    new AdminRouter();
-
     this.router = new MoviesRouter();
+
+    new AdminRouter();
 
     assign(this, Backbone.Events, options);
 
