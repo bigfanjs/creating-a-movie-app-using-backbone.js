@@ -1,9 +1,10 @@
 import Backbone from 'backbone';
+import ModelView from '../../../lib/model-view';
 import template from '../templates/login-form.pug';
 
-export default Backbone.View.extend({
+export default ModelView.extend({
   template,
-  className: 'well',
+  className: 'row',
   events: {
     'click #login': 'login'
   },
