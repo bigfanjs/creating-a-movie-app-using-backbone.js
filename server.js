@@ -19,7 +19,9 @@ const
   isAuthenticated = admin.isAuthenticated;
 
 // initiating express:
-const app = express();
+const
+  app = express(),
+  join = path.join;
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'jade');
@@ -33,11 +35,19 @@ app.use(session({
   saveUninitialized: false,
   secret: 'my little cat'
 }));
-app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(join(__dirname, './public')));
 
 /* reroute all urls to the public/index.js to allow Backbone
    to deal with routing.*/
-app.use('/movies', express.static(path.join(__dirname, './public')));
+app.use('/movies', express.static(join(__dirname, './public')));
+app.use('/admin/login', express.static(join(__dirname, './public')));
+app.use('/admin', function (req, res, next) {
+  if (req.session.uid) {
+    res.redirect('/movies');
+  } else {
+    res.redirect('/admin/login');
+  }
+});
 
 // administration:
 app.get('/admin/logout/', login.logout);
