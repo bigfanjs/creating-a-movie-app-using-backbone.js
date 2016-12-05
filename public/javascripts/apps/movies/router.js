@@ -7,10 +7,10 @@ export default Backbone.Router.extend({
     this.app = App.start( MoviesApp );
   },
   routes: {
-    'movies': 'displayMovies',
+    'movies/': 'displayMovies',
     'movies/page/:page': 'displayMovies',
     'movies/view/:id': 'viewMovie',
-    '*default': 'defaultRoute'
+    '': 'defaultRoute'
   },
   displayMovies: function ( id = 1 ) {
     this.app.viewList(id > 0 ? id : 1);
@@ -19,6 +19,6 @@ export default Backbone.Router.extend({
     this.app.viewMovie( id );
   },
   defaultRoute() {
-    this.navigate('movies', true);
+    this.navigate('movies/', true);
   }
 });
