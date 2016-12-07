@@ -8,7 +8,7 @@ export default Backbone.Router.extend({
     this.app = App.start( loginApp );
   },
   routes: {
-    'admin/login/': 'login'
+    'admin/login': 'login'
   },
   login: function () {
     this.app.viewForm();
