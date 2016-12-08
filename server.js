@@ -50,7 +50,7 @@ app.delete('/api/movies/:id', isAuthenticated(), movies.deleteMovie);
 /* reroute all urls to the public/index.js to allow Backbone
    to deal with routing.*/
 app.get('*', (req, res) => {
-  res.sendFile('index.html', {
+  res.sendFile('app.html', {
     root: join(__dirname, './public')
   });
 });
