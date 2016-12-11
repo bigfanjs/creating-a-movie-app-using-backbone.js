@@ -41,6 +41,13 @@ app.use(express.static(join(__dirname, './public')));
 app.get('/admin/logout/', login.logout);
 app.post('/admin/login/', login.submit);
 
+app.get('/session', isAuthenticated(), function (req, res) {
+  res.send(200, {
+    auth: true,
+    admin: res.admin
+  });
+});
+
 app.get('/api/movies/', movies.showMovies);
 app.get('/api/movies/:id', movies.viewMovie);
 app.post('/api/movies/', isAuthenticated(), movies.createMovie);
