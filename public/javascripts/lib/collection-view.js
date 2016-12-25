@@ -33,30 +33,12 @@ const
     view.render();
 
     return view;
-  },
-  closeChildViews = function ( childViews ) {
-    forEach(childViews, view => {
-      closeChildView( view, childViews );
-    });
-  },
-  closeChildView = function ( view ) {
-    if ( typeof view === 'undefined' ) {
-      throw TypeError('no view is specified');
-    }
-
-    if ( isFunction( view.remove ) ) {
-      view.remove();
-    }
-
-    this.stopListening( view );
-
-    delete childViews[ view.model.cid ];
   };
 
 const
   CollectionView = Backbone.View.extend({
     initialize() {
-      const childViews = this.childViews = {};
+      this.childViews = {};
 
       this.listenTo(this.collection, 'add', bind(modelAdded, this));
       this.listenTo(this.collection, 'remove', bind(modelRemoved, this));
@@ -65,7 +47,7 @@ const
     render() {
       var $html;
 
-      closeChildViews( this.childViews );
+      this.closeChildViews();
 
       $html = this.collection.slice(0).map(model => {
         const view = renderModel.call(this, model, this.childViews);
@@ -79,7 +61,29 @@ const
     },
     remove() {
       Backbone.View.prototype.remove.call( this );
-      closeChildViews( this.childViews );
+      this.closeChildViews();
+    },
+    closeChildViews() {
+      if ( this.childViews.length === 0 ) {
+        return;
+      }
+
+      forEach(this.childViews, view => {
+        this.closeChildView( view );
+      });
+    },
+    closeChildView: function ( view ) {
+      if (typeof view === 'undefined') {
+        throw TypeError('no view is specified');
+      }
+
+      if (isFunction( view.remove )) {
+        view.remove();
+      }
+
+      this.stopListening( view );
+
+      delete this.childViews[ view.model.cid ];
     }
   });
 
