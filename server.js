@@ -16,7 +16,7 @@ const
 
 const
   admin = require('./lib/middleware/admin'),
-  isAuthenticated = admin.isAuthenticated;
+  isAuth = admin.isAuthenticated;
 
 // initiating express:
 const
@@ -41,7 +41,7 @@ app.use(express.static(join(__dirname, './public')));
 app.get('/admin/logout/', login.logout);
 app.post('/admin/login/', login.submit);
 
-app.get('/session', isAuthenticated(), function (req, res) {
+app.get('/session', isAuth(), function (req, res) {
   res.send(200, {
     auth: true,
     admin: res.admin
@@ -50,9 +50,9 @@ app.get('/session', isAuthenticated(), function (req, res) {
 
 app.get('/api/movies/', movies.showMovies);
 app.get('/api/movies/:id', movies.viewMovie);
-app.post('/api/movies/', isAuthenticated(), movies.createMovie);
-app.put('/api/movies/:id', isAuthenticated(), movies.updateMovie);
-app.delete('/api/movies/:id', isAuthenticated(), movies.deleteMovie);
+app.post('/api/movies/', isAuth(), movies.createMovie);
+app.put('/api/movies/:id', isAuth(), movies.updateMovie);
+app.delete('/api/movies/:id', isAuth(), movies.deleteMovie);
 
 /* reroute all urls to the public/index.js to allow Backbone
    to deal with routing.*/
