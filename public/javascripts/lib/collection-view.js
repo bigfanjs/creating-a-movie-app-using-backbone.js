@@ -14,7 +14,7 @@ const
   },
   modelRemoved = function ( model ) {
     const view = this.childViews[ model.cid ];
-    closeChildView(this.childViews, view);
+    this.closeChildView(view);
   },
 
   /* This function is given the model and it
@@ -60,15 +60,14 @@ const
       return this;
     },
     remove() {
-      Backbone.View.prototype.remove.call( this );
+      Backbone.View.prototype.remove.call(this);
       this.closeChildViews();
     },
     closeChildViews() {
-      if ( this.childViews.length === 0 ) {
-        return;
-      }
+      const views = this.childViews || {};
+      // console.log('Ass', views);
 
-      forEach(this.childViews, view => {
+      forEach(views, view => {
         this.closeChildView( view );
       });
     },
