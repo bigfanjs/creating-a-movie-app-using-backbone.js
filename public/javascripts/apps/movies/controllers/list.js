@@ -30,6 +30,20 @@ module.exports = {
     this.region.show( layout );
     layout.getRegion('filters').show( filter );
     layout.getRegion('list').show( list );
+
+    this.listenTo(filter, 'lookup', function (title) {
+      const
+        filtered = collection.filter(movie => {
+          return movie.get('title').match(new RegExp(title, 'i'));
+        }),
+        list = new MovieListView({
+          collection: new Backbone.Collection( filtered )
+        });
+
+      layout
+        .getRegion('list')
+        .show( list );
+    });
   },
   destroy: function () {
     this.region.remove();
