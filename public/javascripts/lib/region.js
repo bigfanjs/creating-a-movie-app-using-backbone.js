@@ -3,19 +3,17 @@ import isFunction from 'lodash/isFunction';
 
 const
     // removes a view from the DOM.
-  close = function () {
-    var view;
-
-    if ( ( view = this.currView ) && view.remove ) {
+  closeView = function ( view ) {
+    if (view && view.remove) {
       view.remove();
     }
   },
-  open = function ( view ) {
-    if ( !this.$elem ) {
-      this.$elem = $( this.elem );
+  openView = function ( view ) {
+    if (!this.$elem) {
+      this.$elem = $(this.elem);
     }
 
-    this.$elem.html( view.render().el );
+    this.$elem.html(view.render().el);
   };
 
 export default {
@@ -26,18 +24,16 @@ export default {
       options
     );
 
-    if ( isFunction( init ) ) {
+    if (isFunction( init )) {
       init.call( region );
     }
 
     return region;
   },
-  /*
-    removes the current view in the region and
-    opens a new one.
-  */
+  /* removes the current view in the region and
+    opens a new one. */
   show( view ) {
-    close.call( this );
-    open.call( this, this.currView = view );
+    closeView(this.currView);
+    openView.call(this, this.currView=view);
   }
 };
