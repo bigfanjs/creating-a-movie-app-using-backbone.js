@@ -3,28 +3,33 @@
   form(role="search")
     label(for="search") Search by title
     .input-group.add-on
-      input#search.form-control(type="text" placeholder="movie title" name="filter")
+      input#search.form-control(type="text" placeholder="movie title" name="title")
       .input-group-btn
-        button.btn.btn-default(type="submit")
+        button#look-up.btn.btn-default(type="submit")
           i.glyphicon.glyphicon-search
     br
-    .form-group
-      label(for="type") Choose a movie type:
-      select#type.form-control(multiple)
-        option(value="funny") Funny
-        option(value="humar") Humar
+    ul.list-group
+      li.list-group-item Popular
+      li.list-group-item Action
+      li.list-group-item Adventure
+      li.list-group-item Animation
+      li.list-group-item Comedy
+      li.list-group-item Drama
+      li.list-group-item Horror
     .form-group
       label(for="sort") Sort By:
       select#order.form-control
-        option(value="")
-        option(value="releaseYear") Release Year
         option(value="popularity") Popularity
-    label(for="year")
-      #year.row
-        .col-sm-2: p 2016
-        .col-sm-2: p 2015
-        .col-sm-2: p 2014
-        .col-sm-2: p 2013
-        .col-sm-2: p 2012
-        .col-sm-2: p 2011
-        .col-sm-2: p 2010
+        option(value="year") Release Year
+        option(value="title") Title
+    .form-group
+      label(for="year")
+      div
+        #year.row
+          .col-sm-2: div 2016
+          .col-sm-2: div 2015
+          .col-sm-2: div 2014
+          .col-sm-2: div 2013
+          .col-sm-2: div 2012
+          .col-sm-2: div 2011
+          .col-sm-2: div 2010
