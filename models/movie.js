@@ -32,7 +32,22 @@ module.exports = function (mongoose, db) {
     cover: {
       name: String,
       path: String
-    }
+    },
+    meta: {
+      dateAdded: Number,
+      favorites: Number,
+      watches: Number,
+      globalActivity: {
+        america: {
+          north: Number,
+          south: Number
+        },
+        asia: Number,
+        europe: Number,
+        africa: Number,
+        australia: Number
+      }
+    } 
   });
 
   return db.model('movie', schema);
