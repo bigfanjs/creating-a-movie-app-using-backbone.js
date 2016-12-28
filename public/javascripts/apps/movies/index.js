@@ -61,5 +61,19 @@ module.exports = {
       };
 
     (new MovieModel()).fetch({ success, error });
+  },
+  viewDashboard: function () {
+    const movieCollection = new MovieCollection();
+
+    movieCollection.fetch({
+      success: function ( collection ) {
+        const list = this.lanch( MovieList );
+
+        list.view( collection );
+      },
+      error: function () {
+        console.log('Cannot fetch data from the server!');
+      }
+    });
   }
 };
