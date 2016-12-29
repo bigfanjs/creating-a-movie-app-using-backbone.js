@@ -16,6 +16,11 @@ export default Backbone.Model.extend({
     language: '',
     cast: [{actor: '', character: '', avatar: null}],
     starring: [{actor: '', character: '', avatar: null}],
+    meta: {
+      dateAdded: '',
+      favorites: '',
+      watches: ''
+    },
     cover: null
   }
 });
