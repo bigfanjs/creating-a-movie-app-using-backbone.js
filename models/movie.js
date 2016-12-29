@@ -34,19 +34,9 @@ module.exports = function (mongoose, db) {
       path: String
     },
     meta: {
-      dateAdded: Number,
+      dateAdded: String,
       favorites: Number,
-      watches: Number,
-      globalActivity: {
-        america: {
-          north: Number,
-          south: Number
-        },
-        asia: Number,
-        europe: Number,
-        africa: Number,
-        australia: Number
-      }
+      watches: Number
     } 
   });
 
