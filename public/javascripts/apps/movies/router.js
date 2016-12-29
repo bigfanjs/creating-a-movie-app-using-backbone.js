@@ -19,7 +19,7 @@ export default Backbone.Router.extend({
   viewMovie: function ( id ) {
     this.app.viewMovie( id );
   },
-  dashboard: function (id = 0) {
+  dashboard: function (id = 1) {
     this.app.viewDashboard(id > 0 ? id : 1);
   },
   defaultRoute: function () {
