@@ -1,10 +1,12 @@
 import Backbone from 'backbone';
 import MoviesApp from './index';
 import App from '../../app';
+import BaseRouter from '../../lib/base-router';
 
-export default Backbone.Router.extend({
+export default BaseRouter.extend({
   initialize: function () {
     this.app = App.start( MoviesApp );
+    BaseRouter.prototype.initialize.call(this);
   },
   routes: {
     'movies': 'displayMovies',
@@ -14,7 +16,8 @@ export default Backbone.Router.extend({
     'admin/dashboard': 'dashboard',
     '': 'defaultRoute'
   },
-  requiresAuth: ['admin/dashboard'],
+  requiresAuth: ['admin/dashboard', 'admin'],
+  preventAccessWhenAuth: ['admin/login'],
   displayMovies: function (id = 1) {
     this.app.viewList(id > 0 ? id : 1);
   },
