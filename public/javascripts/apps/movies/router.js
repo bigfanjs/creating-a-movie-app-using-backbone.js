@@ -10,9 +10,11 @@ export default Backbone.Router.extend({
     'movies': 'displayMovies',
     'movies/page/:page': 'displayMovies',
     'movies/view/:id': 'viewMovie',
+    'admin': 'dashboard',
     'admin/dashboard': 'dashboard',
     '': 'defaultRoute'
   },
+  requiresAuth: ['admin/dashboard'],
   displayMovies: function (id = 1) {
     this.app.viewList(id > 0 ? id : 1);
   },
