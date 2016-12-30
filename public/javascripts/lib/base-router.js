@@ -1,6 +1,5 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Session from '';
 
 export default Backbone.Router.extend({
   route: function (route, name, callback) {
@@ -13,10 +12,20 @@ export default Backbone.Router.extend({
 
     if (requiresAuth.contains( route )) {
       _.wrap(callback, function (cb) {
-        if (Session.isLoggenIn()) {
+        if (this.session.isLoggenIn()) {
           cb();
         } else {
-          this.navigate('admin/login');
+          this.navigate('admin/login', true);
+        }
+      });
+    }
+
+    if (preventAccessWhenAuth.contains( route )) {
+      _.wrap(callback, function (cb) {
+        if (this.session.isLoggenIn()) {
+          this.navigate('admin/dashboard', true);
+        } else {
+          cb();
         }
       });
     }
