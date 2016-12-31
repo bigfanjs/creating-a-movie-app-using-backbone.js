@@ -1,18 +1,27 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
+import App from '../app';
 
 export default Backbone.Router.extend({
   route: function (route, name, callback) {
-    if (!_isRegExp(route)) route = _routeToRegExp(route);
+    if (!_isRegExp(route)) {
+      route = _routeToRegExp(route);
+    }
+
     if (_isFunction(name)) {
       callback = name;
       name = '';
     }
-    if (!callback) callback = this[name];
+
+    if (!callback) {
+      callback = this[ name ];
+    }
 
     if (requiresAuth.contains( route )) {
+      App.conformLogin();
+
       _.wrap(callback, function (cb) {
-        if (this.session.isLoggenIn()) {
+        if (App.isLoggenIn()) {
           cb();
         } else {
           this.navigate('admin/login', true);
@@ -21,8 +30,10 @@ export default Backbone.Router.extend({
     }
 
     if (preventAccessWhenAuth.contains( route )) {
+      App.conformLogin();
+      
       _.wrap(callback, function (cb) {
-        if (this.session.isLoggenIn()) {
+        if (App.isLoggenIn()) {
           this.navigate('admin/dashboard', true);
         } else {
           cb();
