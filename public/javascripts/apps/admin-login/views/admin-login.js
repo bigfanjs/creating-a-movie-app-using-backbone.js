@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import $ from 'jquery';
 import ModelView from '../../../lib/model-view';
 import template from '../templates/login-form.pug';
 
@@ -10,6 +11,7 @@ export default ModelView.extend({
   },
   login: function (e) {
     e.preventDefault();
+
     $.ajax({
       url: 'admin/login',
       type: 'POST',
@@ -18,8 +20,8 @@ export default ModelView.extend({
         username: $('#username').val(),
         password: $('#password').val()
       },
-      success: function ( data ) {
-        window.location.replace = '/admin/pictures';
+      success: data => {
+        this.navigate('admin/dashboard', true);
       }
     });
   }
