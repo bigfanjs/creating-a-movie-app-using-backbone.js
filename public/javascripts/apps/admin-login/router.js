@@ -1,5 +1,4 @@
 import Backbone from 'backbone';
-import $ from 'jquery';
 import App from '../../app';
 import loginApp from './index.js';
 
