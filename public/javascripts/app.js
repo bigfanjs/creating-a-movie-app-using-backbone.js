@@ -11,7 +11,9 @@ const
   assign = Object.assign,
   create = Object.create;
 
-var app = null;
+var
+  app = null,
+  admin = false;
 
 export default {
   region: Region.setup({elem: '#main'}),
@@ -34,10 +36,24 @@ export default {
       }
     }
 
-    app = App.setup({ region: this.region });
+    app = App.setup({region: this.region});
 
     return app;
   },
   // Forward the message to other sub apps!
-  notify: function ( msg ) {}
+  notify: function ( msg ) {},
+  conformAuth: function () {
+    $.ajax('/session')
+      .done(function () {
+        admin = true;
+      })
+      .fail(function () {
+        admin = false;
+      });
+
+    return this;
+  },
+  isLoggedIn: function () {
+    return admin;
+  }
 };
