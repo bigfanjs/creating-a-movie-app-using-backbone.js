@@ -1,12 +1,49 @@
 import Backbone from 'backbone';
+import $ from 'jquery';
+import forEach from 'lodash/forEach';
 import MoviesApp from './index';
 import App from '../../app';
-import BaseRouter from '../../lib/base-router';
 
-export default BaseRouter.extend({
+export default Backbone.Router.extend({
   initialize: function () {
     this.app = App.start( MoviesApp );
-    BaseRouter.prototype.initialize.call( this );
+  },
+  execute: function (callback, args, name) {
+    var route;
+
+    forEach(this.routes, (value, key) => {
+      if (name == value) {
+        route = key;
+      }
+    });
+
+    if (this.requiresAuth.includes(route)) {
+      $.ajax('/session')
+        .done(() => {
+          this.navigate('admin/dashboard', true);
+        })
+        .fail(() => {
+          this.navigate('admin/login', true);
+        });
+
+      return false;
+    }
+
+    if (this.preventAccessWhenAuth.includes(route)) {
+      $.ajax('/session')
+        .done(() => {
+          this.navigate('admin/dashboard', true);
+        })
+        .fail(() => {
+          this.navigate('admin/login');
+        });
+
+      return false;
+    }
+
+    if (callback) {
+      return callback.apply(this, args);
+    }
   },
   routes: {
     'movies': 'displayMovies',
