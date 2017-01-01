@@ -66,7 +66,7 @@ module.exports = {
     const movieCollection = new MovieCollection();
 
     movieCollection.fetch({
-      success: function ( collection ) {
+      success: collection => {
         const list = this.lanch( MovieList );
 
         list.view( collection );
