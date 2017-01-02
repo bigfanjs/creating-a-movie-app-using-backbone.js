@@ -10,3 +10,19 @@ body {
 #filter-bar {
   margin-right: 20px;
 }
+
+.btn span.glyphicon {         
+  opacity: 0;       
+}
+.btn.active span.glyphicon {        
+  opacity: 1;       
+}
+
+#create-movie > div {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#search, #search-box button {
+  border-radius: 0;
+}
