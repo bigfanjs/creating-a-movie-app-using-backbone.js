@@ -1,39 +1,24 @@
 import Backbone from 'backbone';
-import $ from 'jquery';
 import forEach from 'lodash/forEach';
 import MoviesApp from './index';
 import App from '../../app';
+import BaseRouter from '../../lib/base-router';
 
-export default Backbone.Router.extend({
+export default BaseRouter.extend({
   initialize: function () {
     this.app = App.start( MoviesApp );
   },
-  execute: function (callback, args, name) {
-    const promise = new Promise((res, rej) => {
-      forEach(this.routes, (value, key) => {
-        if (value === name) {
-          if (this.requiresAuth.includes(key)) {
-            this.porformAuth(
-              () => { res(callback.apply(this, args)); },
-              () => { this.navigate('admin/login', true); }
-            );
-            return false;
-          }
-          if (this.preventAccessWhenAuth.includes(key)) {
-            this.porformAuth(
-              () => { this.navigate('admin/dashboard', true); },
-              () => { res(callback.apply(this, args)); }
-            );
-
-            return false;
-          }
-
-          res(callback.apply(this, args));
-        }
+  before: {
+    'admin/dashboard': function () {
+      return new Promise((resolve, reject) => {
+        this.porformAuth()
+          .fail((err) => {
+            this.navigate('admin/login', true);
+            reject();
+          })
+          .done(() => { resolve(); });
       });
-    });
-
-    return promise;
+    }
   },
   routes: {
     'movies': 'displayMovies',
@@ -42,15 +27,6 @@ export default Backbone.Router.extend({
     'admin': 'admin',
     'admin/dashboard': 'dashboard',
     '': 'defaultRoute'
-  },
-  requiresAuth: ['admin/dashboard'],
-  preventAccessWhenAuth: ['admin/login'],
-  porformAuth: function (res, rej) {
-    $.ajax({
-      url: '/session',
-      success: res,
-      error: rej
-    });
   },
   displayMovies: function (id = 1) {
     this.app.viewList(id > 0 ? id : 1);
