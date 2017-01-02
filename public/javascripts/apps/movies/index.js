@@ -2,6 +2,7 @@ import MovieModel from './models/movie-model';
 import MovieCollection from './collections/movie-collection';
 import MovieList from './controllers/list';
 import MovieViewer from './controllers/viewer';
+import Dashboard from './controllers/dashboard';
 import isFunction from 'lodash/isFunction';
 import bind from 'lodash/bind';
 
@@ -67,7 +68,7 @@ module.exports = {
 
     movieCollection.fetch({
       success: collection => {
-        const list = this.lanch( MovieList );
+        const list = this.lanch( Dashboard );
 
         list.view( collection );
       },
