@@ -1,0 +1,43 @@
+.dashboard-filter-bar
+.col-xs-9
+    <div id="create-movie" class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-lg btn-success">Create A New Movie</button>
+    </div>
+    </div>
+    <div id="search-box">
+      <form>
+        <div class="input-group add-on">
+          <input type="text" class="form-control" placeholder="movie title" name="filter" id="search" ng-model="title">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-click="lookUp(title)">
+              <i class="glyphicon glyphicon-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  #create-movie.row
+    .col-xs-12
+      button.btn.btn-lg.btn-success Create A New Movie
+  #search-box
+    form
+      .input-group.add-on
+        input#sreach.form-control(type="text" placeholder="movie title" name="filter")
+        .input-group-btn
+          button.btn.btn-default(type="submit")
+            i.glyphicon.glyphicon-search
+  table#admin-movies-list.table.table-striped.table-bordered
+    thead
+      tr
+        th Picture
+        th Title
+        th Date Added
+        th Total Watches
+        th Favorites
+        th Global Activity
+        th Action
+    tbody.dashboard-view
+.footer.text-muted.navbar.navbar-inverse.navbar-fixed-bottom © 2015.
+  a(href="https://twitter.com/bigfanjs" target="_blank") Adel Jojo
