@@ -8,17 +8,21 @@ const
       view.remove();
     }
   },
-  openView = function ( view ) {
+  openView = function (view, replace) {
     if (!this.$elem) {
       this.$elem = $(this.elem);
     }
 
-    this.$elem.html(view.render().el);
+    if (replace === true) {
+      this.$elem.replaceWith(view.render().el);
+    } else {
+      this.$elem.html(view.render().el);
+    }
   };
 
 export default {
   // instantiates the Region Object.
-  setup( options, init ) {
+  setup(options, init) {
     const region = Object.assign(
       Object.create( this ),
       options
@@ -32,8 +36,8 @@ export default {
   },
   /* removes the current view in the region and
     opens a new one. */
-  show( view ) {
+  show(view, replace) {
     closeView(this.currView);
-    openView.call(this, this.currView=view);
+    openView.call(this, this.currView=view, replace);
   }
 };
