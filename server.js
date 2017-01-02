@@ -14,14 +14,21 @@ const
   movies = require('./routes/movies'),
   login = require('./routes/login');
 
-const
-  admin = require('./lib/middleware/admin'),
-  isAuth = admin.isAuthenticated;
-
+const admin = require('./lib/middleware/admin');
 // initiating express:
 const
   app = express(),
   join = path.join;
+
+const isAuth = function (req, res, next) {
+  const uid = req.session.uid;
+
+  if (uid) {
+    return next();
+  } else {
+    res.status(401).end('Access Denied');
+  }
+};
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'jade');
@@ -36,23 +43,21 @@ app.use(session({
   secret: 'my little cat'
 }));
 app.use(express.static(join(__dirname, './public')));
+app.use(admin());
 
 // administration:
 app.get('/admin/logout/', login.logout);
 app.post('/admin/login/', login.submit);
 
-app.get('/session', isAuth(), function (req, res) {
-  res.send(200, {
-    auth: true,
-    admin: res.admin
-  });
+app.get('/session', isAuth, function (req, res) {
+  res.status(200).json( res.admin );
 });
 
 app.get('/api/movies/', movies.showMovies);
 app.get('/api/movies/:id', movies.viewMovie);
-app.post('/api/movies/', isAuth(), movies.createMovie);
-app.put('/api/movies/:id', isAuth(), movies.updateMovie);
-app.delete('/api/movies/:id', isAuth(), movies.deleteMovie);
+app.post('/api/movies/', isAuth, movies.createMovie);
+app.put('/api/movies/:id', isAuth, movies.updateMovie);
+app.delete('/api/movies/:id', isAuth, movies.deleteMovie);
 
 /* reroute all urls to the public/index.js to allow Backbone
    to deal with routing.*/
