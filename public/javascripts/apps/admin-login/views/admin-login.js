@@ -13,15 +13,18 @@ export default ModelView.extend({
     e.preventDefault();
 
     $.ajax({
-      url: 'admin/login',
+      url: '/admin/login',
       type: 'POST',
       dataType: 'json',
       data: {
         username: $('#username').val(),
         password: $('#password').val()
       },
+      error: err => {
+        window.location.pathname = 'admin/login';
+      },
       success: data => {
-        this.navigate('admin/dashboard', true);
+        window.location.pathname = 'admin/dashboard';
       }
     });
   }
