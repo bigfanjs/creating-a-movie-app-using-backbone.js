@@ -9,41 +9,31 @@ export default Backbone.Router.extend({
     this.app = App.start( MoviesApp );
   },
   execute: function (callback, args, name) {
-    var route;
+    const promise = new Promise((res, rej) => {
+      forEach(this.routes, (value, key) => {
+        if (value === name) {
+          if (this.requiresAuth.includes(key)) {
+            this.porformAuth(
+              () => { res(callback.apply(this, args)); },
+              () => { this.navigate('admin/login', true); }
+            );
+            return false;
+          }
+          if (this.preventAccessWhenAuth.includes(key)) {
+            this.porformAuth(
+              () => { this.navigate('admin/dashboard', true); },
+              () => { res(callback.apply(this, args)); }
+            );
 
-    forEach(this.routes, (value, key) => {
-      if (name == value) {
-        route = key;
-      }
+            return false;
+          }
+
+          res(callback.apply(this, args));
+        }
+      });
     });
 
-    if (this.requiresAuth.includes(route)) {
-      $.ajax('/session')
-        .done(() => {
-          this.navigate('admin/dashboard', true);
-        })
-        .fail(() => {
-          this.navigate('admin/login', true);
-        });
-
-      return false;
-    }
-
-    if (this.preventAccessWhenAuth.includes(route)) {
-      $.ajax('/session')
-        .done(() => {
-          this.navigate('admin/dashboard', true);
-        })
-        .fail(() => {
-          this.navigate('admin/login');
-        });
-
-      return false;
-    }
-
-    if (callback) {
-      return callback.apply(this, args);
-    }
+    return promise;
   },
   routes: {
     'movies': 'displayMovies',
@@ -55,6 +45,13 @@ export default Backbone.Router.extend({
   },
   requiresAuth: ['admin/dashboard'],
   preventAccessWhenAuth: ['admin/login'],
+  porformAuth: function (res, rej) {
+    $.ajax({
+      url: '/session',
+      success: res,
+      error: rej
+    });
+  },
   displayMovies: function (id = 1) {
     this.app.viewList(id > 0 ? id : 1);
   },
