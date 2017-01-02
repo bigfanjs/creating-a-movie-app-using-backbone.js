@@ -9,11 +9,11 @@ function send404(res, err) {
 exports.submit = function (req, res) {
   const body = req.body;
 
-  Admin.authenticate(body.name, body.pass, (err, admin) => {
+  Admin.authenticate(body.username, body.password, (err, admin) => {
     if ( err ) { return send404(res, err); }
 
     if ( admin ) {
-      req.session.uid = admin.id;
+      req.session.uid = admin._id;
       res.status(202).json( admin );
     } else {
       res.status(401).end('Sorry, Invalid Credantials!');
