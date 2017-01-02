@@ -21,10 +21,10 @@ export default ModelView.extend({
         password: $('#password').val()
       },
       error: err => {
-        window.location.pathname = 'admin/login';
+        window.location.pathname = '/admin/login';
       },
       success: data => {
-        window.location.pathname = 'admin/dashboard';
+        window.location.pathname = '/admin/dashboard';
       }
     });
   }
