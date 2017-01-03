@@ -1,5 +1,5 @@
-import ModelView from '../../../../model-view';
-import template from '../../templates/movie-editor-form.pug';
+import ModelView from '../../../../lib/model-view';
+import template from '../../templates/editor/movie-editor-form.pug';
 
 export default ModelView.extend({
   template,
