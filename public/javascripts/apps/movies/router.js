@@ -24,6 +24,8 @@ export default BaseRouter.extend({
     'movies': 'displayMovies',
     'movies/page/:page': 'displayMovies',
     'movies/view/:id': 'viewMovie',
+    'movies/edit/:id': 'editMovie',
+    'movies/new': 'createMovie',
     'admin': 'admin',
     'admin/dashboard': 'dashboard',
     '': 'defaultRoute'
@@ -33,6 +35,12 @@ export default BaseRouter.extend({
   },
   viewMovie: function ( id ) {
     this.app.viewMovie( id );
+  },
+  editMovie: function ( id ) {
+    this.app.editMovie( id );
+  },
+  createMovie: function () {
+    this.app.createMovie();
   },
   dashboard: function (id = 1) {
     this.app.viewDashboard(id > 0 ? id : 1);
