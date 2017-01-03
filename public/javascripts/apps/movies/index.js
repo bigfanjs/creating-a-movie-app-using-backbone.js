@@ -2,6 +2,7 @@ import MovieModel from './models/movie-model';
 import MovieCollection from './collections/movie-collection';
 import MovieList from './controllers/list';
 import MovieViewer from './controllers/viewer';
+import MovieEditor from './controllers/editor';
 import Dashboard from './controllers/dashboard';
 import isFunction from 'lodash/isFunction';
 import bind from 'lodash/bind';
@@ -62,6 +63,27 @@ module.exports = {
       };
 
     (new MovieModel()).fetch({ success, error });
+  },
+  createMovie: function () {
+    const
+      model = new MovieModel(),
+      editor = this.lanch( MovieEditor );
+
+    editor.view( model );
+  },
+  editMovie: function ( id ) {
+    const model = new MovieModel({_id: id});
+
+    model.fetch({
+      success: model => {
+        const editor = this.lanch( MovieEditor );
+
+        editor.view( model );
+      },
+      error: err => {
+        console.log('Failed to fetch data from the server [editMovie]');
+      }
+    });
   },
   viewDashboard: function () {
     const movieCollection = new MovieCollection();
