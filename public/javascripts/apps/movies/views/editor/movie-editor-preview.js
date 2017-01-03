@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import ModelView from '../../../../model-view';
-import template from '../../templates/movie-editor-preview.pug';
+import ModelView from '../../../../lib/model-view';
+import template from '../../templates/editor/movie-editor-preview.pug';
 
 export default ModelView.extend({
   template,
