@@ -5,15 +5,43 @@ import MovieEditorPreview from '../views/editor/movie-editor-preview';
 import App from '../../../app';
 
 const
-  handleAvatarSelect = function ( avatar ) {
+  notify = function () {
+    App.notify();
+    App.router.navigate('admin/dashboard', true);
+  },
+  uploadCover = function (movie, callback) {
+    this.trigger('cover:upload:start');
 
+    movie.uploadCover(this.cover, {
+      progress: (length, uploaded, percent) => {
+        this.trigger(
+          'cover:upload:progress',
+          {length, uploaded, percent}
+        );
+      },
+      success: res => {
+        this.trigger('cover:upload:done');
+        callback( res );
+      },
+      error: err => {
+        this.trigger('cover:upload:fail');
+      }
+    });
+  },
+  handleCoverSelect = function ( cover ) {
+    this.cover = cover;
   },
   save = function ( movie ) {
     movie.save(null, {
-      success: function () {
-        
+      success: () => {
+        if (typeof this.cover !== null) {
+          uploadCover.call(this, movie, notify);
+          this.cover = null;
+        }
       },
-      error: function () {}
+      error: () => {
+        console.log('Failed saving movie to the server');
+      }
     });
   },
   cancel = function () {
@@ -41,7 +69,7 @@ export default {
     this.listenTo(form, 'save', save);
     this.listenTo(form, 'cancel', cancel);
 
-    this.listenTo(preview, 'avatar:selected', handleAvatarSelect);
+    this.listenTo(preview, 'avatar:selected', handleCoverSelect);
   },
   destroy: function () {
     this.region.remove();
