@@ -13,7 +13,7 @@ import MovieListFilterBar from '../views/list/movie-list-filter-bar';
 import MovieListItemView from '../views/list/movie-list-item-view';
 import MovieListView from '../views/list/movie-list-view';
 
-module.exports = {
+export default {
   setup: function (options = {}) {
     const ctrl = Object.create( this );
 
