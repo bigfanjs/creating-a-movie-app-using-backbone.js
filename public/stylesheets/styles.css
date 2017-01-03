@@ -26,3 +26,7 @@ body {
 #search, #search-box button {
   border-radius: 0;
 }
+
+#search-box {
+  margin-bottom: 20px;
+}
