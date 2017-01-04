@@ -39,5 +39,8 @@ export default {
   show(view, replace) {
     closeView(this.currView);
     openView.call(this, this.currView=view, replace);
+  },
+  remove() {
+    closeView(this.currView);
   }
 };
