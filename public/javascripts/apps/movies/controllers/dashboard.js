@@ -1,5 +1,6 @@
 import Backbone from 'backbone';
 import DashboardLayout from '../views/list/dashboard-layout';
+import DashboardNavbar from '../views/list/dashboard-navbar';
 import DashboardFilterBar from '../views/list/dashboard-filter-bar';
 import DashboardView from '../views/list/dashboard-view';
 
@@ -14,11 +15,13 @@ module.exports = {
   view: function ( collection ) {
     const
       layout = new DashboardLayout(),
+      navbar = new DashboardNavbar(),
       filter = new DashboardFilterBar(),
       list = new DashboardView({ collection });
 
     this.region.show( layout );
     layout.getRegion('filters').show( filter );
+    layout.getRegion('navbar').show( navbar );
     layout.getRegion('list').show(list, true);
 
     this.listenTo(filter, 'lookup', function (title) {

@@ -5,6 +5,7 @@ export default Layout.extend({
   template,
   className: 'row page-container',
   regions: {
+    navbar: '.dashboard-navbar',
     filters: '.dashboard-filter-bar',
     list: '.dashboard-view'
   }
