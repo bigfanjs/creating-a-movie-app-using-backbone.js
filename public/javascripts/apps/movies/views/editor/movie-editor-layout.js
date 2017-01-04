@@ -1,11 +1,11 @@
-import ModelView from '../../../../lib/model-view';
+import Layout from '../../../../lib/layout';
 import template from '../../templates/editor/movie-editor-layout.pug';
 
-export default ModelView.extend({
+export default Layout.extend({
   template,
   className: 'row page-container',
   regions: {
-    preview: '.movie-editor-preview',
-    form: '.movie-editor-form'
+    preview: '#preview-container',
+    form: '#form-container'
   }
 });
