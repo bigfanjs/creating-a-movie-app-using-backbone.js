@@ -8,6 +8,72 @@
         .col-xs-6.col-sm-9.col-md-11
           input#title.form-control(type="text" placeholder="Movie Title" value=title)
       .form-group
-        label.control-label.col-xs-6.col-sm-3.col-md-1(for="story") Story
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="story") Overview
         .col-xs-6.col-sm-9.col-md-11
           textarea#title.form-control(rows="4" cols="50" placeholder="Movie Story..." value=story)
+      .form-group
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="type") Type
+        .col-xs-6.col-sm-9.col-md-11
+          select#type.form-control
+            option(value="") Drama
+            option(value="") Comic
+            option(value="") Comidy
+            option(value="") Imaginety
+            option(value="") Action
+      .form-group
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="releaseDate") Release Date
+        .col-xs-6.col-sm-9.col-md-11
+          input#release-date.form-control(type="text" placeholder="MM/DD/YYYY")
+      .form-group
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="runningTime") Running Time
+        .col-xs-6.col-sm-9.col-md-11
+          input#running-time.form-control(type="text")
+      .form-group
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="director") Director
+        .col-xs-6.col-sm-9.col-md-11
+          input#running-time.form-control(type="text")
+      .form-group
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="country") Country
+        .col-xs-6.col-sm-9.col-md-11
+          select#country.form-control
+            option(value="") America
+            option(value="") England
+            option(value="") France
+            option(value="") China
+            option(value="") Germany
+            option(value="") India
+            option(value="") Spane
+      .form-group
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="language") Language
+        .col-xs-6.col-sm-9.col-md-11
+          select#language.form-control
+            option(value="") English
+            option(value="") Frensh
+            option(value="") Arabic
+            option(value="") Sweden
+            option(value="") Spanish
+            option(value="") German
+.panel.panel-simple
+  .panel-heading
+    .panel-title
+    | Cast
+    button#new-actor.btn.btn-primary.btn-sm.pull-right NEW
+  .panel-body
+    form#cast-list.form-horizontal
+      .form-group
+        .row
+          .col-sm-4.col-md-2
+            img.img-circle(width="30" height="30" src="/images/admin.jpeg")
+          .col-sm-4.col-md-4
+            input.form-control(type="text" placeholder="Full name")
+          .col-sm-4.col-md-4
+            input.form-control(type="text" placeholder="Character name")
+          .col-sm-4.col-md-2
+            a#delete.pull-right(href="#") Delete
+.panel.panel-simple
+  .panel-heading
+    .panel-title
+    | Starring
+    button#new-actor.btn.btn-primary.btn-sm.pull-right NEW
+  .panel-body
+    form#cast-list.form-horizontal
