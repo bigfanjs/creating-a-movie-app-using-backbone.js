@@ -26,8 +26,13 @@ body {
   margin-bottom: 20px;
 }
 
+#navbar {
+  min-height: initial;
+  height: 55px;
+}
+
 #navbar img, #navbar #create-movie {
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 #navbar img {
@@ -59,4 +64,13 @@ body {
 .panel-simple > .panel-heading {
   font-size: 1.4em;
   background-color: #dedede;
+}
+
+#navbar #admin-name h4 {
+  margin-bottom: 0;
+}
+
+#navbar #admin-name h5 {
+  margin: 0;
+  color: #a0a0a0;
 }
