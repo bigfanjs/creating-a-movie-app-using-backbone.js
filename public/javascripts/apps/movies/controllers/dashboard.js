@@ -4,7 +4,7 @@ import DashboardNavbar from '../views/list/dashboard-navbar';
 import DashboardFilterBar from '../views/list/dashboard-filter-bar';
 import DashboardView from '../views/list/dashboard-view';
 
-module.exports = {
+export default {
   setup: function (options = {}) {
     const ctrl = Object.create( this );
 
