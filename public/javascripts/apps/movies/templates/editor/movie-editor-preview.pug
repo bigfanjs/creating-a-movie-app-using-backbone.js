@@ -1,7 +1,7 @@
 span.notice Click to change the movie's cover picture
 .box.thumbnail
   .photo
-    img.cover(src="/images/#{cover | 'default.jpg'}" alt="cover photo")
+    img#cover.img-responsive(src=cover?cover.path:'/images/default.jpg' alt="cover photo")
     input#cover(type="file" name="cover" style="display:none")
   .caption
     h5#title= title
