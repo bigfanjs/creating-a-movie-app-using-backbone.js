@@ -10,21 +10,27 @@ div.col-xs-3
         option(value="all") all time
     hr(width="100%")
     div.form-group
-      .checkbox
-        label
-          input(type="checkbox" value="watched")
-          | Unfavored Movies
-      .checkbox
-        label
-          input(type="checkbox" value="unwatched")
-          | Unwatched Movies
+      .form-check
+        label.form-check-label
+          input.form-check-input(type="checkbox" value="unliked")
+          |  Unliked Movies
+      .form-check
+        label.form-check-label
+          input.form-check-input(type="checkbox" value="unwatched")
+          |  Unwatched Movies
+      .form-check
+        label.form-check-label
+          input.form-check-input(type="checkbox" value="disliked")
+          |  Disliked Movies
     hr(width="100%")
     div.form-group
       label(for="order") Sort by
       select.form-control
-        option(value="mostWatched") most watched
-        option(value="oldest") oldest
-        option(value="newest") newest
+        option(value="mostWatched" disabled) Top Watched
+        option(value="mostWatched" disabled) Top Liked
+        option(value="mostWatched" disabled) Top Disliked
+        option(value="oldest") Oldest
+        option(value="newest") Newest
     div.btn-group
-      button#filter.btn.btn-default(type="submit") Search
+      button#filter.btn.btn-primary(type="submit") Filter
       button#clear.btn.btn-default Clear
