@@ -4,7 +4,7 @@ import template from '../../templates/editor/movie-editor-preview.pug';
 
 export default ModelView.extend({
   template,
-  className: 'movie-editor-preview',
+  className: 'col-xs-12 col-sm-4 col-md-3',
   events: {
     'click img': 'selectFileDialog',
     'change #avatar': 'handleFileSelect'
