@@ -38,3 +38,25 @@ body {
 #navbar #admin-name {
   line-height: 36px;
 }
+
+#footer {
+  min-height: initial;
+  height: 22px;
+  background-image: initial;
+  background-color: #dedede;
+  color: black;
+  border: initial;
+  padding-left: 30px
+}
+
+
+.panel-simple {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-simple > .panel-heading {
+  font-size: 1.4em;
+  background-color: #dedede;
+}
