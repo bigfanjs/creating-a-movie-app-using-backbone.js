@@ -7,17 +7,17 @@ export default ModelView.extend({
   className: 'col-xs-12 col-sm-4 col-md-3',
   events: {
     'click img': 'selectFileDialog',
-    'change #avatar': 'handleFileSelect'
+    'change #cover-input': 'handleFileSelect'
   },
   selectFileDialog: function () {
-    $('#avatar').trigger('click');
+    $('#cover-input').trigger('click');
   },
   handleFileSelect: function ( e ) {
     e.preventDefault();
 
     const
-      img = this.$('img.avatar'),
-      selectedFile = this.$('#avatar')[0].files[0],
+      img = this.$('img#cover-img'),
+      selectedFile = this.$('#cover-input')[0].files[0],
       fileReader = new FileReader();
 
     fileReader.onload = function ( e ) {
@@ -26,7 +26,7 @@ export default ModelView.extend({
       img.attr('src', url);
     };
 
-    fileReader.readAsDataUrl( selectedFile );
+    fileReader.readAsDataURL( selectedFile );
     this.trigger('avatar:selected', selectedFile);
   }
 });
