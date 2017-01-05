@@ -1,0 +1,15 @@
+.col-sm-4.col-md-5
+  img#img-avatar.img-circle(width="30" height="30" src="/images/admin.png")
+  .input-group
+    input#file-name.form-control(placeholder="" type="text" disabled)
+    span.input-group-btn
+      #select-avatar.btn.btn-default
+        span.glyphicon.glyphicon-folder-open
+        span#input-title Browse...
+        input(type="file")
+.col-sm-4.col-md-3
+  input.form-control(type="text" placeholder="Actor name")
+.col-sm-4.col-md-3
+  input.form-control(type="text" placeholder="Character name")
+.col-sm-4.col-md-1
+  a#delete.pull-right(href="#") Delete
