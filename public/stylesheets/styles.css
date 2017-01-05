@@ -11,12 +11,12 @@ body {
   margin-right: 20px;
 }
 
-.btn span.glyphicon {         
+/*.btn span.glyphicon {         
   opacity: 0;       
 }
 .btn.active span.glyphicon {        
   opacity: 1;       
-}
+}*/
 
 #search, #search-box button {
   border-radius: 0;
@@ -85,4 +85,33 @@ span.notice {
 
 #cover-img {
   cursor: pointer;
+}
+
+#select-avatar {
+  position: relative;
+  overflow: hidden;
+  margin: 0px;    
+  color: #333;
+  border-color: #ccc;
+}
+
+#select-avatar input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+#select-avatar #input-title {
+  margin-left: 9px;
+}
+
+#img-avatar {
+  float: left;
+  margin-right: 10px;
 }
