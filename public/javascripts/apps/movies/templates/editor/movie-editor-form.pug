@@ -6,15 +6,15 @@
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="title") Title
         .col-xs-6.col-sm-9.col-md-11
-          input#title.form-control(type="text" placeholder="Movie Title" value=title)
+          input#title-input.form-control(type="text" placeholder="Movie Title" value=title)
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="story") Overview
         .col-xs-6.col-sm-9.col-md-11
-          textarea#title.form-control(rows="4" cols="50" placeholder="Movie Story..." value=story)
+          textarea#overview-input.form-control(rows="4" cols="50" placeholder="Movie Story..." value=story)
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="type") Type
         .col-xs-6.col-sm-9.col-md-11
-          select#type.form-control
+          select#type-input.form-control
             option(value="") Drama
             option(value="") Comic
             option(value="") Comidy
@@ -23,19 +23,19 @@
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="releaseDate") Release Date
         .col-xs-6.col-sm-9.col-md-11
-          input#release-date.form-control(type="text" placeholder="MM/DD/YYYY")
+          input#releaseDate-input.form-control(type="text" placeholder="MM/DD/YYYY")
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="runningTime") Running Time
         .col-xs-6.col-sm-9.col-md-11
-          input#running-time.form-control(type="text")
+          input#runningTime-input.form-control(type="text")
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="director") Director
         .col-xs-6.col-sm-9.col-md-11
-          input#running-time.form-control(type="text")
+          input#runningTime-input.form-control(type="text")
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="country") Country
         .col-xs-6.col-sm-9.col-md-11
-          select#country.form-control
+          select#country-input.form-control
             option(value="") America
             option(value="") England
             option(value="") France
@@ -46,7 +46,7 @@
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="language") Language
         .col-xs-6.col-sm-9.col-md-11
-          select#language.form-control
+          select#language-input.form-control
             option(value="") English
             option(value="") Frensh
             option(value="") Arabic
@@ -58,61 +58,29 @@
         .col-xs-6.col-sm-9.col-md-11
           .input-group
             span.input-group-addon $
-            input#budget.form-control(type="number")
+            input#budget-input.form-control(type="number")
             span.input-group-addon .00
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="boxOffice") Box Office
         .col-xs-6.col-sm-9.col-md-11
           .input-group
             span.input-group-addon $
-            input#box-office.form-control(type="number")
+            input#boxOffice-input.form-control(type="number")
             span.input-group-addon .00
 .panel.panel-simple
   .panel-heading
     .panel-title
     | Cast
-    button#new-actor.btn.btn-primary.btn-sm.pull-right NEW
+    button#new-cast-item.btn.btn-primary.btn-sm.pull-right NEW
   .panel-body
-    form#cast-list.form-horizontal
-      .row
-        .col-sm-4.col-md-5
-          img#img-avatar.img-circle(width="30" height="30" src="/images/admin.png")
-          .input-group
-            input#file-name.form-control(placeholder="" type="text" disabled)
-            span.input-group-btn
-              #select-avatar.btn.btn-default
-                span.glyphicon.glyphicon-folder-open
-                span#input-title Browse...
-                input(type="file")
-        .col-sm-4.col-md-3
-          input.form-control(type="text" placeholder="Actor name")
-        .col-sm-4.col-md-3
-          input.form-control(type="text" placeholder="Character name")
-        .col-sm-4.col-md-1
-          a#delete.pull-right(href="#") Delete
+    form#movie-cast-container.form-horizontal
 .panel.panel-simple
   .panel-heading
     .panel-title
     | Starring
-    button#new-actor.btn.btn-primary.btn-sm.pull-right NEW
+    button#new-starring-item.btn.btn-primary.btn-sm.pull-right NEW
   .panel-body
-    form#starring-list.form-horizontal
-      .row
-        .col-sm-4.col-md-5
-          img#img-avatar.img-circle(width="30" height="30" src="/images/admin.png")
-          .input-group
-            input#file-name.form-control(placeholder="" type="text" disabled)
-            span.input-group-btn
-              #select-avatar.btn.btn-default
-                span.glyphicon.glyphicon-folder-open
-                span#input-title Browse...
-                input(type="file")
-        .col-sm-4.col-md-3
-          input.form-control(type="text" placeholder="Actor name")
-        .col-sm-4.col-md-3
-          input.form-control(type="text" placeholder="Character name")
-        .col-sm-4.col-md-1
-          a#delete.pull-right(href="#") Delete
+    form#movie-starring-container.form-horizontal
   .panel-footer.clearfix
     .panel-buttons
       button#cancel.btn.btn-default Cancel
