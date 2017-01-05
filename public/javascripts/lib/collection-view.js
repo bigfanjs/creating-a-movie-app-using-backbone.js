@@ -13,6 +13,7 @@ const
     this.$el.append( view.el );
   },
   modelRemoved = function ( model ) {
+    console.log('Good!');
     const view = this.childViews[ model.cid ];
     this.closeChildView(view);
   },
@@ -22,7 +23,7 @@ const
     Which is added to a list of child views
     and is registered for all events. */
   renderModel = function (model, childViews) {
-    const view = new this.MovieItem({ model });
+    const view = new this.ItemView({ model });
 
     childViews[ model.cid ] = view;
 
@@ -39,6 +40,8 @@ const
   CollectionView = Backbone.View.extend({
     initialize() {
       this.childViews = {};
+
+      console.log( this.collection );
 
       this.listenTo(this.collection, 'add', bind(modelAdded, this));
       this.listenTo(this.collection, 'remove', bind(modelRemoved, this));
