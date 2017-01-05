@@ -53,6 +53,20 @@
             option(value="") Sweden
             option(value="") Spanish
             option(value="") German
+      .form-group
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="budget") Budget
+        .col-xs-6.col-sm-9.col-md-11
+          .input-group
+            span.input-group-addon $
+            input#budget.form-control(type="number")
+            span.input-group-addon .00
+      .form-group
+        label.control-label.col-xs-6.col-sm-3.col-md-1(for="boxOffice") Box Office
+        .col-xs-6.col-sm-9.col-md-11
+          .input-group
+            span.input-group-addon $
+            input#box-office.form-control(type="number")
+            span.input-group-addon .00
 .panel.panel-simple
   .panel-heading
     .panel-title
@@ -60,20 +74,32 @@
     button#new-actor.btn.btn-primary.btn-sm.pull-right NEW
   .panel-body
     form#cast-list.form-horizontal
-      .form-group
-        .row
-          .col-sm-4.col-md-2
-            img.img-circle(width="30" height="30" src="/images/admin.jpeg")
-          .col-sm-4.col-md-4
-            input.form-control(type="text" placeholder="Full name")
-          .col-sm-4.col-md-4
-            input.form-control(type="text" placeholder="Character name")
-          .col-sm-4.col-md-2
-            a#delete.pull-right(href="#") Delete
+      .row
+        .col-sm-4.col-md-2
+          img.img-circle(width="30" height="30" src="/images/admin.png")
+        .col-sm-4.col-md-4
+          input.form-control(type="text" placeholder="Full name")
+        .col-sm-4.col-md-4
+          input.form-control(type="text" placeholder="Character name")
+        .col-sm-4.col-md-2
+          a#delete.pull-right(href="#") Delete
 .panel.panel-simple
   .panel-heading
     .panel-title
     | Starring
     button#new-actor.btn.btn-primary.btn-sm.pull-right NEW
   .panel-body
-    form#cast-list.form-horizontal
+    form#starring-list.form-horizontal
+      .row
+        .col-sm-4.col-md-2
+          img.img-circle(width="30" height="30" src="/images/admin.png")
+        .col-sm-4.col-md-4
+          input.form-control(type="text" placeholder="Full name")
+        .col-sm-4.col-md-4
+          input.form-control(type="text" placeholder="Character name")
+        .col-sm-4.col-md-2
+          a#delete.pull-right(href="#") Delete
+  .panel-footer.clearfix
+    .panel-buttons
+      button#cancel.btn.btn-default Cancel
+      button#save.btn.btn-success Save
