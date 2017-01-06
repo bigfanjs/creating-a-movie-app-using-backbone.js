@@ -35,12 +35,25 @@ const
   handleCoverSelect = function ( cover ) {
     this.cover = cover;
   },
+  handleAvatarselect = function ( avatar ) {
+    this.avatar = avatar;
+  },
   save = function ( movie ) {
     movie.save(null, {
       success: () => {
         if (typeof this.cover !== null) {
           uploadCover.call(this, movie, notify);
           this.cover = null;
+        }
+
+        if (typeof this.starringItem !== null) {
+          uploadAvatar.call(this, movie, notify);
+          this.starringItem = null;
+        }
+
+        if (typeof this.castItem !== null) {
+          uploadAvatar.call(this, movie, notify);
+          this.castItem = null;
         }
       },
       error: () => {
@@ -106,6 +119,7 @@ export default {
     this.listenTo(starringList, 'item:actor:delete', bind(deleteStarringItem, this));
 
     this.listenTo(preview, 'cover:select', handleCoverSelect);
+    this.listenTo(preview, 'avatar:select', handleAvatarSelect);
   },
   destroy: function () {
     this.region.remove();
