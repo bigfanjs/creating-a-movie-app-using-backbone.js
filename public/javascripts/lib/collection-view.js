@@ -13,7 +13,6 @@ const
     this.$el.append( view.el );
   },
   modelRemoved = function ( model ) {
-    console.log('Good!');
     const view = this.childViews[ model.cid ];
     this.closeChildView(view);
   },
@@ -40,8 +39,6 @@ const
   CollectionView = Backbone.View.extend({
     initialize() {
       this.childViews = {};
-
-      console.log( this.collection );
 
       this.listenTo(this.collection, 'add', bind(modelAdded, this));
       this.listenTo(this.collection, 'remove', bind(modelRemoved, this));
