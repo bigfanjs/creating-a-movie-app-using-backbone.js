@@ -1,6 +1,6 @@
-import Backbone from 'backbone';
+import BasicModel from '../../../lib/basic-model';
 
-export default Backbone.Model.extend({
+export default BasicModel.extend({
   urlRoot: 'api/movies',
   defaults: {
     title: '',
@@ -22,5 +22,8 @@ export default Backbone.Model.extend({
       watches: ''
     },
     cover: null
+  },
+  uploadCover: function (blob, options) {
+    this.upload(blob, 'cover', options);
   }
 });
