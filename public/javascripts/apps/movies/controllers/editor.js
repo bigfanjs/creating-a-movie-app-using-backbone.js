@@ -32,10 +32,48 @@ const
       }
     });
   },
+  uploadCastItem = function (character, callback) {
+    this.trigger('cast:item:upload:start');
+
+    character.uploadAvatar(this.castItem, {
+      progress: (length, uploaded, percent) => {
+        this.trigger(
+          'cast:item:upload:progress',
+          {length, uploaded, percent}
+        );
+      },
+      success: res => {
+        this.trigger('cast:item:upload:done');
+        callback( res );
+      },
+      error: err => {
+        this.trigger('cast:item:upload:fail');
+      }
+    });
+  },
+  uplaodStarringItem = function (character, callback) {
+    this.trigger('starring:item:upload:start');
+
+    character.uploadAvatar(this.starringItem, {
+      progress: (length, uploaded, percent) => {
+        this.trigger(
+          'starring:item:upload:progress',
+          {length, uploaded, percent}
+        );
+      },
+      success: res => {
+        this.trigger('starring:item:upload:done');
+        callback( res );
+      },
+      error: err => {
+        this.trigger('starring:item:upload:fail');
+      }
+    });
+  },
   handleCoverSelect = function ( cover ) {
     this.cover = cover;
   },
-  handleAvatarselect = function ( avatar ) {
+  handleAvatarSelect = function ( avatar ) {
     this.avatar = avatar;
   },
   save = function ( movie ) {
@@ -54,7 +92,7 @@ const
         if (typeof this.castItem !== null) {
           uploadAvatar.call(this, movie, notify);
           this.castItem = null;
-        }
+        } 
       },
       error: () => {
         console.log('Failed saving movie to the server');
