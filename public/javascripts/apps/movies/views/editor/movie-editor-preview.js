@@ -27,6 +27,6 @@ export default ModelView.extend({
     };
 
     fileReader.readAsDataURL( selectedFile );
-    this.trigger('avatar:selected', selectedFile);
+    this.trigger('cover:select', selectedFile);
   }
 });

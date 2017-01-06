@@ -105,7 +105,7 @@ export default {
     this.listenTo(castList, 'item:actor:delete', bind(deleteCastItem, this));
     this.listenTo(starringList, 'item:actor:delete', bind(deleteStarringItem, this));
 
-    this.listenTo(preview, 'avatar:selected', handleCoverSelect);
+    this.listenTo(preview, 'cover:select', handleCoverSelect);
   },
   destroy: function () {
     this.region.remove();
