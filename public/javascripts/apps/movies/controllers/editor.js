@@ -52,18 +52,16 @@ const
     App.router.navigate('admin/dashboard', true);
   },
   addCastItem = function () {
-    console.log('Shit!');
     this.castCollection.add({});
   },
   addStarringItem = function () {
     this.starringCollection.add({});
   },
-  deleteCastItem = function ( actor ) {
-    console.log('Shit!');
-    this.castCollection.remove( actor );
+  deleteCastItem = function (view, model) {
+    this.castCollection.remove( model );
   },
-  deleteStarringItem = function ( actor ) {
-    this.starringCollection.remove( actor );
+  deleteStarringItem = function (view, model) {
+    this.starringCollection.remove( model );
   };
 
 export default {
