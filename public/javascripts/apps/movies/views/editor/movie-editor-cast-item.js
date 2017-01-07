@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import ModelView from '../../../../lib/model-view';
 import template from '../../templates/editor/movie-editor-cast-item.pug';
 
@@ -5,8 +6,12 @@ export default ModelView.extend({
   template,
   className: 'form-group',
   events: {
-    'click a': 'deleteActor',
+    'click a#delete': 'deleteActor',
+    'click i': 'selectFileDialog',
     'change #avatar-input': 'handleAvatarSelect'
+  },
+  selectFileDialog() {
+    this.$('#avatar-input').trigger('click');
   },
   deleteActor( e ) {
     e.preventDefault();

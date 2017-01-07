@@ -1,15 +1,16 @@
-.col-sm-4.col-md-5
-  img#img-avatar.img-circle(width="30" height="30" src="/images/admin.png")
-  .input-group
-    input#file-name.form-control(placeholder="" type="text" disabled)
-    span.input-group-btn
-      #select-avatar.btn.btn-default
-        span.glyphicon.glyphicon-folder-open
-        span#input-title Browse...
-        input#avatar-input(type="file")
-.col-sm-4.col-md-3
+.col-md-1
+  .avatar-img-container
+    img#img-avatar.img-circle(width="30" height="30" src="/images/admin.png")
+    i.fa.fa-upload.fa-2x
+    input#avatar-input(type="file" name="avatar" style="display:none")
+.col-md-4
   input.form-control(type="text" placeholder="Actor name")
-.col-sm-4.col-md-3
+.col-md-4
   input.form-control(type="text" placeholder="Character name")
-.col-sm-4.col-md-1
+.col-md-2
+  .form-check
+    label.form-check-label
+      input.form-check-input(type="checkbox" value="star")
+      |  Star
+.col-md-1
   a#delete.pull-right(href="#") Delete

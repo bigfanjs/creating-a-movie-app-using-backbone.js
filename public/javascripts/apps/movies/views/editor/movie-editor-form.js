@@ -14,12 +14,10 @@ export default Layout.extend({
   events: {
     'click #cancel': 'cancel',
     'click #save': 'save',
-    'click #new-cast-item': 'addCastItem',
-    'click #new-starring-item': 'addStarringItem'
+    'click #new-actor': 'addCastItem',
   },
   regions: {
-    'cast': '#movie-cast-container',
-    'starring': '#movie-starring-container'
+    'cast': '#movie-cast-container'
   },
   cancel: function () {
     this.trigger('form:cancel', this.model);
@@ -39,9 +37,6 @@ export default Layout.extend({
   },
   addCastItem: function () {
     this.trigger('cast:add', true);
-  },
-  addStarringItem: function () {
-    this.trigger('starring:add', true);
   },
   getInput: function ( selector ) {
     return this.$el.find( selector ).val();

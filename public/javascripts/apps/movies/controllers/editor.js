@@ -3,7 +3,6 @@ import MovieEditorLayout from '../views/editor/movie-editor-layout';
 import MovieEditorForm from '../views/editor/movie-editor-form';
 import MovieEditorPreview from '../views/editor/movie-editor-preview';
 import MovieEditorCastView from '../views/editor/movie-editor-cast-view';
-import MovieEditorStarringView from '../views/editor/movie-editor-starring-view';
 import MovieCharCollection from '../collections/movie-char-collection';
 import bind from 'lodash/bind';
 import App from '../../../app';
@@ -32,41 +31,22 @@ const
       }
     });
   },
-  uploadCastItem = function (character, callback) {
-    this.trigger('cast:item:upload:start');
+  uploadAvatar = function (character, callback) {
+    this.trigger('avatar:upload:start');
 
     character.uploadAvatar(this.castItem, {
       progress: (length, uploaded, percent) => {
         this.trigger(
-          'cast:item:upload:progress',
+          'avatar:upload:progress',
           {length, uploaded, percent}
         );
       },
       success: res => {
-        this.trigger('cast:item:upload:done');
+        this.trigger('avatar:upload:done');
         callback( res );
       },
       error: err => {
-        this.trigger('cast:item:upload:fail');
-      }
-    });
-  },
-  uplaodStarringItem = function (character, callback) {
-    this.trigger('starring:item:upload:start');
-
-    character.uploadAvatar(this.starringItem, {
-      progress: (length, uploaded, percent) => {
-        this.trigger(
-          'starring:item:upload:progress',
-          {length, uploaded, percent}
-        );
-      },
-      success: res => {
-        this.trigger('starring:item:upload:done');
-        callback( res );
-      },
-      error: err => {
-        this.trigger('starring:item:upload:fail');
+        this.trigger('avatar:upload:fail');
       }
     });
   },
@@ -102,17 +82,11 @@ const
   cancel = function () {
     App.router.navigate('admin/dashboard', true);
   },
-  addCastItem = function () {
+  addActor = function () {
     this.castCollection.add({});
   },
-  addStarringItem = function () {
-    this.starringCollection.add({});
-  },
-  deleteCastItem = function (view, model) {
+  deleteActor = function (view, model) {
     this.castCollection.remove( model );
-  },
-  deleteStarringItem = function (view, model) {
-    this.starringCollection.remove( model );
   };
 
 export default {
@@ -124,37 +98,27 @@ export default {
     return ctrl;
   },
   view: function ( model ) {
-    const
-      cast = model.get('cast') || [],
-      starring = model.get('starring') || [];
+    const cast = model.get('cast') || [];
 
     this.castCollection = new MovieCharCollection( cast );
-    this.starringCollection = new MovieCharCollection( starring );
-
     const
       layout = new MovieEditorLayout(),
       form = new MovieEditorForm({ model }),
       preview = new MovieEditorPreview({ model }),
       castList = new MovieEditorCastView({
         collection: this.castCollection
-      }),
-      starringList = new MovieEditorStarringView({
-        collection: this.starringCollection
       });
 
     this.region.show( layout );
     layout.getRegion('form').show( form );
     layout.getRegion('preview').show( preview );
     form.getRegion('cast').show( castList );
-    form.getRegion('starring').show( starringList );
 
     this.listenTo(form, 'form:save', bind(save, this));
     this.listenTo(form, 'form:cancel', cancel);
-    this.listenTo(form, 'cast:add', bind(addCastItem, this));
-    this.listenTo(form, 'starring:add', bind(addStarringItem, this));
+    this.listenTo(form, 'cast:add', bind(addActor, this));
 
-    this.listenTo(castList, 'item:actor:delete', bind(deleteCastItem, this));
-    this.listenTo(starringList, 'item:actor:delete', bind(deleteStarringItem, this));
+    this.listenTo(castList, 'item:actor:delete', bind(deleteActor, this));
 
     this.listenTo(preview, 'cover:select', handleCoverSelect);
     this.listenTo(preview, 'avatar:select', handleAvatarSelect);
