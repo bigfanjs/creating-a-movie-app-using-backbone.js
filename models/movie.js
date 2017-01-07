@@ -21,14 +21,6 @@ module.exports = function (mongoose, db) {
         path: String
       }
     }],
-    starring: [{
-      actor: String,
-      character: String,
-      avatar: {
-        name: String,
-        path: String
-      }
-    }],
     cover: {
       name: String,
       path: String
