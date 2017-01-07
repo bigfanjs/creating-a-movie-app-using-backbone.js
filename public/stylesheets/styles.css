@@ -117,3 +117,8 @@ span.notice {
 .avatar-img-container:hover:after {
   opacity:1;
 }
+
+#movie-cast-container .form-group {
+  display: flex;
+  align-items: center;
+}
