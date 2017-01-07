@@ -19,7 +19,8 @@ module.exports = function (mongoose, db) {
       avatar: {
         name: String,
         path: String
-      }
+      },
+      star: Boolean
     }],
     cover: {
       name: String,
