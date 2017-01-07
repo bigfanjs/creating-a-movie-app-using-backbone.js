@@ -26,9 +26,9 @@ export default Layout.extend({
     e.preventDefault();
 
     keys.forEach(key => {
-      const selector = this.getInput(`#${ key }-input`);
+      const input = this.getInput(`#${ key }-input`);
 
-      if ( selector ) {
+      if (input !== null) {
         this.model.set(key, input);
       }
     });
@@ -39,6 +39,8 @@ export default Layout.extend({
     this.trigger('cast:add', true);
   },
   getInput: function ( selector ) {
+    if ( !selector ) return null;
+
     return this.$el.find( selector ).val();
   }
 });
