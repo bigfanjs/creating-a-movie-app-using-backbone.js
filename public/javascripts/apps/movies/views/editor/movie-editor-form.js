@@ -14,7 +14,7 @@ export default Layout.extend({
   events: {
     'click #cancel': 'cancel',
     'click #save': 'save',
-    'click #new-actor': 'addCastItem',
+    'click #new-actor': 'addActor',
   },
   regions: {
     'cast': '#movie-cast-container'
@@ -31,11 +31,11 @@ export default Layout.extend({
       if ( selector ) {
         this.model.set(key, input);
       }
-
-      this.trigger('form:save', this.model);
     });
+
+    this.trigger('form:save', this.model);
   },
-  addCastItem: function () {
+  addActor: function () {
     this.trigger('cast:add', true);
   },
   getInput: function ( selector ) {
