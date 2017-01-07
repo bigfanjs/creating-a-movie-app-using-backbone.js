@@ -14,8 +14,12 @@ export default BasicModel.extend({
     narrator: '',
     country: '',
     language: '',
-    cast: [{actor: '', character: '', avatar: null}],
-    starring: [{actor: '', character: '', avatar: null}],
+    cast: [{
+      actor: '',
+      character: '',
+      avatar: null,
+      star: ''
+    }],
     meta: {
       dateAdded: '',
       favorites: '',
