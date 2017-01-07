@@ -1,7 +1,7 @@
 import BasicModel from '../../../lib/basic-model';
 
 export default BasicModel.extend({
-  urlRoot: 'api/movies',
+  urlRoot: '/api/movies',
   defaults: {
     title: '',
     type: '',
