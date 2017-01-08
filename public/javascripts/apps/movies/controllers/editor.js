@@ -83,8 +83,8 @@ const
 
         Promise.all(promises).then(notify, notify);
       },
-      error: () => {
-        console.log('Failed saving movie to the server');
+      error: err => {
+        console.log('Failed saving movie to the server', err);
       }
     });
   },
