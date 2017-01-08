@@ -24,6 +24,7 @@ const
           );
         },
         success: res => {
+          console.log('That is awesome!');
           this.trigger('cover:upload:done');
           res( res );
         },
@@ -69,13 +70,14 @@ const
   save = function ( movie ) {
     const cast = this.castCollection.toJSON();
 
-    this.mode.set({ cast });
+    movie.set({ cast });
 
     movie.save(null, {
       success: () => {
         let promises = [];
 
         if (typeof this.cover !== null) {
+          console.log('Fine!');
           promises.push(uploadCover.call(this, movie));
           this.cover = null;
         }

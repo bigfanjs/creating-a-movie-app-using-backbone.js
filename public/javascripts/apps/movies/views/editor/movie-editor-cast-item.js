@@ -10,6 +10,11 @@ export default ModelView.extend({
     'click i': 'selectFileDialog',
     'change #avatar-input': 'handleAvatarSelect'
   },
+  bindings: {
+    '#actor-input': 'actor',
+    '#char-input': 'character',
+    '#starring-input': 'starring'
+  },
   selectFileDialog() {
     this.$('#avatar-input').trigger('click');
   },

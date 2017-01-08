@@ -4,6 +4,7 @@ export default BasicModel.extend({
   defaults: {
     actor: '',
     character: '',
+    starring: '',
     avatar: null
   },
   uploadAvatar: function (blob, options) {

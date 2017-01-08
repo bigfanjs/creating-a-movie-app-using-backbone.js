@@ -4,14 +4,12 @@ export default BasicModel.extend({
   urlRoot: '/api/movies',
   defaults: {
     title: '',
-    type: '',
+    genre: '',
     runningTime: '',
     releaseDate: '',
-    featuredSong: '',
-    story: '',
+    overview: '',
     director: '',
     boxOffice: '',
-    narrator: '',
     country: '',
     language: '',
     cast: [{
