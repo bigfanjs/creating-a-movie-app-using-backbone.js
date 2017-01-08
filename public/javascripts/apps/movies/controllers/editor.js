@@ -67,6 +67,10 @@ const
     this.avatar = avatar;
   },
   save = function ( movie ) {
+    const cast = this.castCollection.toJSON();
+
+    this.mode.set({ cast });
+
     movie.save(null, {
       success: () => {
         let promises = [];

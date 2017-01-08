@@ -39,8 +39,12 @@ export default Layout.extend({
     this.trigger('cast:add', true);
   },
   getInput: function ( selector ) {
-    if ( !selector ) return null;
+    const elem = this.$el.find( selector ); 
 
-    return this.$el.find( selector ).val();
+    if (!elem) {
+      return null;
+    }
+
+    return elem.val();
   }
 });

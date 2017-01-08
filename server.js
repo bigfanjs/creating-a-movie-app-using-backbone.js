@@ -36,6 +36,7 @@ app.set('view engine', 'jade');
 // app.use(favicon('./public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(cookieParser('What should I say?'));
 app.use(session({
   resave: false,

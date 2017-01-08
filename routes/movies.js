@@ -29,7 +29,8 @@ exports.viewMovie = function (req, res) {
 };
 
 exports.createMovie = function (req, res) {
-  Movie.create((err, movie) => {
+  console.log('body:', req.body);
+  Movie.create(req.body, (err, movie) => {
     if ( err ) { return send404(res, err); }
 
     res.status( 201 ).json( movie );
