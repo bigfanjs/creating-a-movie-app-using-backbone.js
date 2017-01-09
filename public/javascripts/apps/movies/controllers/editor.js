@@ -15,7 +15,7 @@ const
   uploadCover = function (movie) {
     this.trigger('cover:upload:start');
 
-    const promise = new Promise((res, rej) => {
+    const promise = new Promise((resolve, reject) => {
       movie.uploadCover(this.cover, {
         progress: (length, uploaded, percent) => {
           this.trigger(
@@ -23,14 +23,13 @@ const
             {length, uploaded, percent}
           );
         },
-        success: res => {
-          console.log('That is awesome!');
+        success: response => {
           this.trigger('cover:upload:done');
-          res( res );
+          resolve( response );
         },
         error: err => {
           this.trigger('cover:upload:fail');
-          rej( err );
+          reject( err );
         }
       });
     });
@@ -40,7 +39,7 @@ const
   uploadAvatar = function (character) {
     this.trigger('avatar:upload:start');
 
-    const promise = new Promise((res, rej) => {
+    const promise = new Promise((resolve, reject) => {
       character.uploadAvatar(this.avatar, {
         progress: (length, uploaded, percent) => {
           this.trigger(
@@ -48,13 +47,13 @@ const
             {length, uploaded, percent}
           );
         },
-        success: res => {
+        success: response => {
           this.trigger('avatar:upload:done');
-          res( res );
+          resolve( response );
         },
         error: err => {
           this.trigger('avatar:upload:fail');
-          rej( err );
+          reject( err );
         }
       });      
     });
@@ -74,20 +73,31 @@ const
 
     movie.save(null, {
       success: () => {
-        let promises = [];
+        // let promises = [];
+
+        // if (typeof this.cover !== null) {
+        //   console.log('Fine!');
+        //   promises.push(uploadCover.call(this, movie));
+        //   this.cover = null;
+        // }
+
+        // if (typeof this.avatar !== null) {
+        //   promises.push(uploadAvatar.call(this, movie));
+        //   this.avatar = null;
+        // }
+
+        // Promise.all(promises).then(notify, notify);
 
         if (typeof this.cover !== null) {
-          console.log('Fine!');
-          promises.push(uploadCover.call(this, movie));
-          this.cover = null;
-        }
+          const promise = uploadCover.call(this, movie);
 
-        if (typeof this.avatar !== null) {
-          promises.push(uploadAvatar.call(this, movie));
-          this.avatar = null;
+          promise.then(() => {
+            this.cover = null;
+            notify();
+          }, function () {
+            console.log('Could not save cover to the server!');
+          });
         }
-
-        Promise.all(promises).then(notify, notify);
       },
       error: err => {
         console.log('Failed saving movie to the server', err);

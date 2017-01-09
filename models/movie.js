@@ -17,14 +17,14 @@ module.exports = function (mongoose, db) {
       actor: String,
       character: String,
       avatar: {
-        name: String,
-        path: String
+        file: String,
+        url: String
       },
       star: Boolean
     }],
     cover: {
-      name: String,
-      path: String
+      file: String,
+      url: String
     },
     meta: {
       dateAdded: String,

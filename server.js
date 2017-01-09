@@ -7,7 +7,8 @@ const
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   favicon = require('serve-favicon'),
-  logger = require('morgan');
+  logger = require('morgan'),
+  multer = require('multer');
 
 // requiring routes:
 const
@@ -18,6 +19,7 @@ const admin = require('./lib/middleware/admin');
 // initiating express:
 const
   app = express(),
+  upload = multer(),
   join = path.join;
 
 const isAuth = function (req, res, next) {
@@ -32,6 +34,7 @@ const isAuth = function (req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'jade');
+app.set('cover', __dirname + '/public/images/');
 
 // app.use(favicon('./public/favicon.ico'));
 app.use(logger('dev'));
@@ -59,6 +62,13 @@ app.get('/api/movies/:id', movies.viewMovie);
 app.post('/api/movies/', isAuth, movies.createMovie);
 app.put('/api/movies/:id', isAuth, movies.updateMovie);
 app.delete('/api/movies/:id', isAuth, movies.deleteMovie);
+app.post(
+  '/api/movies/:id/cover',
+  isAuth,
+  upload.single('cover'),
+  movies.uploadCover.bind(null, app.get('cover'))
+);
+// app.post('/api/movies/:id/actor/:id/avatar', isAuth, movies.uploadAvatar);
 
 /* reroute all urls to the public/index.js to allow Backbone
    to deal with routing.*/

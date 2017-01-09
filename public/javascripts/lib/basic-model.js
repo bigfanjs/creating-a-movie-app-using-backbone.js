@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import $ from 'jquery';
 
 export default Backbone.Model.extend({
   upload: function (blob, type, options) {
@@ -8,7 +9,7 @@ export default Backbone.Model.extend({
 
     $.ajax({
       url: `/api/movies/${ this.get('_id') }/${ type }`,
-      method: 'GET',
+      method: 'POST',
       data: form,
       success: options.success,
       error: options.error,
