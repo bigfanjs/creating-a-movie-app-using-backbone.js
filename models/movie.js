@@ -3,11 +3,11 @@
 module.exports = function (mongoose, db) {
   const schema = new mongoose.Schema({
     title: String,
-    type: String,
+    genre: String,
     runningTime: String,
     releaseDate: String,
     featureSong: String,
-    story: String,
+    overview: String,
     directore: String,
     boxOffice: String,
     narrator: String,
