@@ -132,9 +132,14 @@ exports.uploadCover = function (dir, req, res, next) {
 
     Movie.findByIdAndUpdate(
       req.params.id,
-      { $set: { cover: cover }}
+      { $set: { cover }},
+      { new: true },
+      function (err, obj) {
+        if ( err ) { return next( err ); }
+
+        res.json({ cover });
+      }
     );
 
-    res.json({cover: cover});
   });
 };
