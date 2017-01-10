@@ -34,7 +34,7 @@ const isAuth = function (req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'jade');
-app.set('cover', __dirname + '/public/images/');
+app.set('cover', join(__dirname, './public/images/'));
 
 // app.use(favicon('./public/favicon.ico'));
 app.use(logger('dev'));
