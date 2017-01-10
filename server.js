@@ -19,7 +19,7 @@ const admin = require('./lib/middleware/admin');
 // initiating express:
 const
   app = express(),
-  upload = multer(),
+  upload = multer({dest: 'tmp/'}),
   join = path.join;
 
 const isAuth = function (req, res, next) {
@@ -34,7 +34,8 @@ const isAuth = function (req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'jade');
-app.set('cover', join(__dirname, './public/images/'));
+app.set('covers', join(__dirname, './public/images/covers/'));
+app.set('avatars', join(__dirname, './public/images/avatars/'));
 
 // app.use(favicon('./public/favicon.ico'));
 app.use(logger('dev'));
@@ -66,9 +67,14 @@ app.post(
   '/api/movies/:id/cover',
   isAuth,
   upload.single('cover'),
-  movies.uploadCover.bind(null, app.get('cover'))
+  movies.uploadCover.bind(null, app.get('covers'))
 );
-// app.post('/api/movies/:id/actor/:id/avatar', isAuth, movies.uploadAvatar);
+app.post(
+  '/api/movies/:id/avatars',
+  isAuth,
+  upload.array('avatars'),
+  movies.uploadAvatars.bind(null, app.get('avatars'))
+);
 
 /* reroute all urls to the public/index.js to allow Backbone
    to deal with routing.*/

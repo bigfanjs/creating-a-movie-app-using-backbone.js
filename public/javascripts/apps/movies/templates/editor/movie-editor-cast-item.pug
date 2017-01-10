@@ -1,16 +1,21 @@
 .col-md-1
   .avatar-img-container
-    img#img-avatar.img-circle(width="30" height="40" src="/images/admin.png")
+    img#img-avatar.img-circle(width="30" height="40" src="/images/actor.png")
     i.fa.fa-upload.fa-2x
     input#avatar-input(type="file" name="avatar" style="display:none")
-.col-md-4
+.col-md-3
   input#actor-input.form-control(type="text" placeholder="Actor name")
-.col-md-4
+.col-md-3
   input#char-input.form-control(type="text" placeholder="Character name")
+.col-md-2
+  select.form-control
+    option(value="") Gender
+    option(value="male") Male
+    option(value="female") Female
 .col-md-2
   .form-check
     label.form-check-label
       input#starring-input.form-check-input(type="checkbox")
-      |  Star
+      | Star
 .col-md-1
   a#delete.pull-right(href="#") Delete

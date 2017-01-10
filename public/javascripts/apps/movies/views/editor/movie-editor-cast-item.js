@@ -20,13 +20,17 @@ export default ModelView.extend({
   },
   deleteActor( e ) {
     e.preventDefault();
-    this.trigger('actor:delete', this.model);
+
+    const index = e.closest('.form-group').index();
+
+    this.trigger('actor:delete', this.model, index);
   },
   handleAvatarSelect( e ) {
     e.preventDefault();
 
     const
       img = this.$('#img-avatar'),
+      index = e.closest('.form-group').index(),
       selectedFile = this.$('#avatar-input')[0].files[0],
       fileReader = new FileReader();
 
@@ -37,6 +41,6 @@ export default ModelView.extend({
     };
 
     fileReader.readAsDataURL( selectedFile );
-    this.trigger('avatar:select', selectedFile);
+    this.trigger('avatar:select', selectedFile, index);
   }
 });

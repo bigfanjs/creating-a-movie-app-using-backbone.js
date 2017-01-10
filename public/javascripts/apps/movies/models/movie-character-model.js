@@ -6,8 +6,5 @@ export default BasicModel.extend({
     character: '',
     starring: '',
     avatar: null
-  },
-  uploadAvatar: function (blob, options) {
-    this.upload(blob, 'avatar', options);
   }
 });

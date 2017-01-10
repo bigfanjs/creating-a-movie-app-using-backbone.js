@@ -114,9 +114,6 @@ span.notice {
   color: #fff;
   border-radius: 50px;
 }
-.avatar-img-container:hover:after {
-  opacity:1;
-}
 
 #movie-cast-container .form-group {
   display: flex;

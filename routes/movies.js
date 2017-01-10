@@ -77,6 +77,8 @@ exports.deleteMovie = function (req, res) {
 exports.uploadCover = function (dir, req, res, next) {
   var filename, fullpath;
 
+  console.log(req.file.path, req.file.fieldname, req.body);
+
   if (!req.headers['content-type'].match(/multipart\/form-data/)) {
     return res
       .status(400)
@@ -103,43 +105,116 @@ exports.uploadCover = function (dir, req, res, next) {
 
   do {
     filename = generateName(
-      undefined,
-      path.extname(req.file.originalname)
+      undefined, path.extname(req.file.originalname)
     );
     fullpath = dir + filename;
   } while (fs.existsSync(fullpath));
 
-  Movie.findById(req.params.id, (err, movie) => {
-    if ( err ) { return next( err ); }
+  const
+    wstream = fs.createWriteStream(fullpath),
+    rstream = fs.createReadStream('./tmp/' + req.file.filename);
 
-    if (has(movie, 'cover.file')) {
-      const prevfile = dir + movie.cover.file;
+  const cover = {
+    file: filename,
+    url: '/images/covers/' + filename
+  };
 
-      if (fs.existsSync(prevfile)) {
-        fs.unlinkSync(prevfile);
-      }
-    }
-
-    const wstream = fs.createWriteStream(fullpath);
-
-    wstream.write(req.file.buffer);
-    wstream.end();
-
-    const cover = {
-      file: filename,
-      url: '/images/' + filename
-    };
-
-    Movie.findByIdAndUpdate(
-      req.params.id,
-      { $set: { cover }},
-      { new: true },
-      function (err, obj) {
+  rstream
+    .on('err', function ( err ) {
+      res.status(400).json({error: 'Failed Uploading Avatar'});
+    })
+    .on('end', function () {
+      fs.unlink('./tmp/' + req.file.filename, err => {
         if ( err ) { return next( err ); }
 
-        res.json({ cover });
+        Movie.findByIdAndUpdate(req.params.id,
+          {$set: { cover }},
+          (err, movie) => {
+            if ( err ) { return next( err ); }
+
+            if (has(movie, 'cover.file')) {
+              const prevAvatar = dir + movie.cover.file;
+
+              if (fs.existsSync(prevAvatar)) {
+                fs.unlinkSync(prevAvatar);
+              }
+            }
+
+            res.status(200).json( cover );
+          }
+        );
+      });
+    })
+    .pipe(wstream);
+};
+
+exports.uploadAvatars = function (dir, req, res, next) {
+  if (!req.headers['content-type'].match(/multipart\/form-data/)) {
+    res.status(400).json({error: 'Invalid content type header!'});
+    return next();
+  }
+
+  if (!has(req, 'files')) {
+    return res
+      .status(400)
+      .json({error: 'No images uploaded just yet!'});
+  }
+
+  req.files.forEach(file => {
+    let filename, fullpath;
+
+    do {
+      filename = generateName(
+        undefined, path.extname(file.originalname)
+      );
+      fullpath = dir + filename;
+    } while (fs.existsSync(fullpath));
+
+    const
+      wstream = fs.createWriteStream(fullpath),
+      rstream = fs.createReadStream('./tmp/' + file.filename);
+
+    Movie.findById(req.params.id, (err, movie) => {
+      if ( err ) { return next(err); }
+
+      const cast = movie.cast;
+
+      cast.forEach((actor, idx) => {
+        const file = req.files[ idx ];
+
+        Movie.findByIdAndUpdate();
+      });
+
+      if (has(movie, 'cover.file')) {
+        const prevAvatar = dir + movie.cover.file;
+
+        if (fs.existsSync(prevAvatar)) {
+          fs.unlinkSync(prevAvatar);
+        }
       }
-    );
+
+      rstream
+        .on('err', function ( err ) {
+          res.status(400).json({error: 'Failed Uploading Avatar'});
+        })
+        .on('end', function () {
+          fs.unlink('./tmp/' + file.filename, err => {
+            if ( err ) { return next( err ); }
+
+            Movie.findByIdAndUpdate(movie._id,
+              {$set: { cover }},
+              { new: true },
+              (err, updatedMovie) => {
+                if ( err ) { return next( err ); }
+
+                res.status(200).json( cover );
+              }
+            );
+          });
+        })
+        .pipe(wstream);
+    });
+
 
   });
 };

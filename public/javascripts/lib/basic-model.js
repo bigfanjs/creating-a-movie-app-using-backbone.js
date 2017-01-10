@@ -5,7 +5,15 @@ export default Backbone.Model.extend({
   upload: function (blob, type, options) {
     const form = new FormData();
 
-    form.append(type, blob);
+    if (Array.isArray( blob ) && blob.length) {
+      blob.forEach((blob, idx) => {
+        if (typeof blob !== 'undefined') {
+          form.append(`${ type }[${ idx }]`, blob);
+        }
+      });
+    } else {
+      form.append(type, blob);
+    }
 
     $.ajax({
       url: `/api/movies/${ this.get('_id') }/${ type }`,

@@ -27,5 +27,8 @@ export default BasicModel.extend({
   },
   uploadCover: function (blob, options) {
     this.upload(blob, 'cover', options);
+  },
+  uploadAvatars: function (blobs, options) {
+    this.upload(blobs, 'avatars', options);
   }
 });

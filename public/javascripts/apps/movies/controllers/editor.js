@@ -36,23 +36,23 @@ const
 
     return promise;
   },
-  uploadAvatar = function (character) {
-    this.trigger('avatar:upload:start');
+  uploadAvatars = function (movie) {
+    this.trigger('avatars:upload:start');
 
     const promise = new Promise((resolve, reject) => {
-      character.uploadAvatar(this.avatar, {
+      movie.uploadAvatars(this.avatars, {
         progress: (length, uploaded, percent) => {
           this.trigger(
-            'avatar:upload:progress',
+            'avatars:upload:progress',
             {length, uploaded, percent}
           );
         },
         success: response => {
-          this.trigger('avatar:upload:done');
+          this.trigger('avatars:upload:done');
           resolve( response );
         },
         error: err => {
-          this.trigger('avatar:upload:fail');
+          this.trigger('avatars:upload:fail');
           reject( err );
         }
       });      
@@ -63,8 +63,8 @@ const
   handleCoverSelect = function ( cover ) {
     this.cover = cover;
   },
-  handleAvatarSelect = function ( avatar ) {
-    this.avatar = avatar;
+  handleAvatarSelect = function ( avatar, id ) {
+    this.avatars[ id ] = avatar;
   },
   save = function ( movie ) {
     const cast = this.castCollection.toJSON();
@@ -88,6 +88,10 @@ const
 
         // Promise.all(promises).then(notify, notify);
 
+        // if (this.avatars.length !== 0) {
+        //   const promise = uploadAvatars.call(this, movie);
+        // }
+
         if (typeof this.cover !== null) {
           const promise = uploadCover.call(this, movie);
 
@@ -110,13 +114,19 @@ const
   addActor = function () {
     this.castCollection.add({});
   },
-  deleteActor = function (view, model) {
+  deleteActor = function (view, model, index) {
+    const avatars = this.avatars;
+
+    avatars.splice(avatars.indexOf(index), 1);
+
     this.castCollection.remove( model );
   };
 
 export default {
   setup: function (options = {}) {
     const ctrl = Object.create( this );
+
+    ctrl.avatars = [];
 
     Object.assign(ctrl, Backbone.Events, options);
 
