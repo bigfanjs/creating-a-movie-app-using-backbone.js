@@ -30,7 +30,7 @@ export default ModelView.extend({
 
     const
       img = this.$('#img-avatar'),
-      index = e.closest('.form-group').index(),
+      index = this.$(e.target).closest('.form-group').index(),
       selectedFile = this.$('#avatar-input')[0].files[0],
       fileReader = new FileReader();
 

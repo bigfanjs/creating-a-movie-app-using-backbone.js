@@ -160,61 +160,134 @@ exports.uploadAvatars = function (dir, req, res, next) {
       .json({error: 'No images uploaded just yet!'});
   }
 
-  req.files.forEach(file => {
-    let filename, fullpath;
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
 
-    do {
-      filename = generateName(
-        undefined, path.extname(file.originalname)
-      );
-      fullpath = dir + filename;
-    } while (fs.existsSync(fullpath));
 
-    const
-      wstream = fs.createWriteStream(fullpath),
-      rstream = fs.createReadStream('./tmp/' + file.filename);
+  // ---------------------------
 
-    Movie.findById(req.params.id, (err, movie) => {
-      if ( err ) { return next(err); }
+  // const promises = [];
 
-      const cast = movie.cast;
+  // req.files.forEach((file, idx) => {
+  //   let filename, fullpath;
 
-      cast.forEach((actor, idx) => {
-        const file = req.files[ idx ];
+  //   do {
+  //     filename = generateName(
+  //       undefined, path.extname(file.originalname)
+  //     );
+  //     fullpath = dir + filename;
+  //   } while (fs.existsSync(fullpath));
 
-        Movie.findByIdAndUpdate();
-      });
+  //   const
+  //     wstream = fs.createWriteStream(fullpath),
+  //     rstream = fs.createReadStream(file.path);
 
-      if (has(movie, 'cover.file')) {
-        const prevAvatar = dir + movie.cover.file;
+  //   const avatar = {
+  //     file: filename,
+  //     url: '/images/avatars/' + filename
+  //   };
+
+  //   const promise = new Promise((resolve, reject) => {
+  //     rstream
+  //       .on('err', function ( err ) {
+  //         res.status(400).json({error: 'Failed Uploading Avatar'});
+  //       })
+  //       .on('end', function () {
+  //         fs.unlink(file.path, err => {
+  //           if ( err ) { return next( err ); }
+
+  //           Movie.findById(req.params._id, (err, movie) => {
+  //             if ( err ) { return next( err ); }
+
+  //             movie.cast[ idx ].avatar = avatar;
+
+  //             movie.save((err, updatedMovie) => {
+  //               if ( err ) { return next( err ); }
+
+  //               resolve( avatar );
+  //             });
+  //           });
+  //         });
+  //       })
+  //       .pipe(wstream);
+  //   });
+
+  //   promises.push( promise );
+  // });
+
+  // Promise
+  //   .all(promises)
+  //   .then(avatars => {
+  //     res.status(200).json(JSON.stringify(avatars));
+  //   });
+
+  // ---------------------------
+
+
+  Movie.findById(req.params.id, (err, movie) => {
+    if (err) { return next( err ); }
+
+    const promises = [];
+
+    movie.cast = movie.cast.map((actor, idx) => {
+      const file = req.files[ idx ];
+
+      let filename, fullpath;
+
+      do {
+        filename = generateName(
+          undefined, path.extname(file.originalname)
+        );
+        fullpath = dir + filename;
+      } while (fs.existsSync(fullpath));
+
+      const
+        wstream = fs.createWriteStream(fullpath),
+        rstream = fs.createReadStream(file.path);
+
+      if(has(actor, 'avatar.file')) {
+        const prevAvatar = dir + actor.avatar.file;
 
         if (fs.existsSync(prevAvatar)) {
           fs.unlinkSync(prevAvatar);
         }
       }
 
-      rstream
-        .on('err', function ( err ) {
-          res.status(400).json({error: 'Failed Uploading Avatar'});
-        })
-        .on('end', function () {
-          fs.unlink('./tmp/' + file.filename, err => {
-            if ( err ) { return next( err ); }
+      actor.avatar = {
+        file: file.filename,
+        url: '/images/avatars/' + file.filename
+      };
 
-            Movie.findByIdAndUpdate(movie._id,
-              {$set: { cover }},
-              { new: true },
-              (err, updatedMovie) => {
-                if ( err ) { return next( err ); }
+      const promise = new Promise((resolve, reject) => {
+        rstream
+          .on('err', function ( err ) {
+            res.status(400).json({error: 'Failed Uploading Avatar'});
+          })
+          .on('end', function () {
+            fs.unlink(file.path, err => {
+              if ( err ) { return next( err ); }
 
-                res.status(200).json( cover );
-              }
-            );
-          });
-        })
-        .pipe(wstream);
+              resolve(actor.avatar);
+            });
+          })
+          .pipe(wstream);
+      });
+
+
+      promises.push(promise);
+
+      return actor;
     });
 
+    movie.save((err, updatedMovie) => {
+      if ( err ) { return next( err ); }
 
+      Promise
+        .all(promises)
+        .then(avatars => {
+          res.status(200).json(JSON.stringify(avatars));
+        });
+    });
   });
 };
