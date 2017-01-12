@@ -5,7 +5,7 @@ export default Layout.extend({
   template,
   className: 'row page-container',
   regions: {
-    widget: '.movie-widget',
-    about: '.about-container'
+    widget: '#movie-viewer-widget',
+    about: '#movie-viewer-about'
   }
 });
