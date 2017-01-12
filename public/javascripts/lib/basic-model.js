@@ -8,7 +8,7 @@ export default Backbone.Model.extend({
     if (Array.isArray( blob ) && blob.length) {
       blob.forEach((blob, idx) => {
         if (typeof blob !== 'undefined') {
-          form.append(`${ type }[${ idx }]`, blob);
+          form.append(type, blob);
         }
       });
     } else {

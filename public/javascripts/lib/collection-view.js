@@ -27,7 +27,13 @@ const
     childViews[ model.cid ] = view;
 
     this.listenTo(view, 'all', ( eventName, model ) => {
-      this.trigger(`item:${ eventName }`, view, model);
+      const args = Array.isArray( model ) ? model : false;
+
+      if (!args) {
+        this.trigger(`item:${ eventName }`, view, model);
+      } else {
+        this.trigger(`item:${ eventName }`, ...args);
+      }
     });
 
     view.render();

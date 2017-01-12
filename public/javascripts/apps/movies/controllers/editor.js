@@ -63,7 +63,7 @@ const
   handleCoverSelect = function ( cover ) {
     this.cover = cover;
   },
-  handleAvatarSelect = function ( avatar, id ) {
+  handleAvatarSelect = function (avatar, id) {
     this.avatars[ id ] = avatar;
   },
   save = function ( movie ) {
@@ -73,35 +73,23 @@ const
 
     movie.save(null, {
       success: () => {
-        // let promises = [];
+        let promises = [];
 
-        // if (typeof this.cover !== null) {
-        //   console.log('Fine!');
-        //   promises.push(uploadCover.call(this, movie));
-        //   this.cover = null;
-        // }
-
-        // if (typeof this.avatar !== null) {
-        //   promises.push(uploadAvatar.call(this, movie));
-        //   this.avatar = null;
-        // }
-
-        // Promise.all(promises).then(notify, notify);
-
-        // if (this.avatars.length !== 0) {
-        //   const promise = uploadAvatars.call(this, movie);
-        // }
+        if (this.avatars.length !== 0) {
+          promises.push(uploadAvatars.call(this, movie));
+          this.avatar = [];
+        }
 
         if (typeof this.cover !== null) {
-          const promise = uploadCover.call(this, movie);
-
-          promise.then(() => {
-            this.cover = null;
-            notify();
-          }, function () {
-            console.log('Could not save cover to the server!');
-          });
+          promises.push(uploadCover.call(this, movie));
+          this.cover = null;
         }
+
+        Promise
+          .all(promises)
+          .then(notify, function ( err ) {
+            console.log( err );
+          });
       },
       error: err => {
         console.log('Failed saving movie to the server', err);
@@ -153,10 +141,19 @@ export default {
     this.listenTo(form, 'form:cancel', cancel);
     this.listenTo(form, 'cast:add', bind(addActor, this));
 
-    this.listenTo(castList, 'item:actor:delete', bind(deleteActor, this));
+    this.listenTo(
+      castList,
+      'item:actor:delete',
+      bind(deleteActor, this)
+    );
+
+    this.listenTo(
+      castList,
+      'item:avatar:select',
+      bind(handleAvatarSelect, this)
+    );
 
     this.listenTo(preview, 'cover:select', handleCoverSelect);
-    this.listenTo(preview, 'avatar:select', handleAvatarSelect);
   },
   destroy: function () {
     this.region.remove();
