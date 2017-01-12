@@ -8,7 +8,7 @@ const
   Movie = require('../models')('movie');
 
 const send404 = function (res, err) {
-  res.status(404).end(err);
+  res.status(404).json({ error: err });
 };
 
 const
@@ -37,7 +37,7 @@ exports.showMovies = function (req, res) {
 };
 
 exports.viewMovie = function (req, res) {
-  Movie.find({ _id: req.params.id }, ( err, movie ) => {
+  Movie.findById(req.params.id, ( err, movie ) => {
     if ( err ) { return send404(res, err); }
 
     res.status(200).json( movie );
@@ -45,7 +45,6 @@ exports.viewMovie = function (req, res) {
 };
 
 exports.createMovie = function (req, res) {
-  console.log('body:', req.body);
   Movie.create(req.body, (err, movie) => {
     if ( err ) { return send404(res, err); }
 
