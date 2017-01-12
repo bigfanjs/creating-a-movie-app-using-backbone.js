@@ -50,7 +50,7 @@ module.exports = {
 
     (new MovieCollection()).fetch({ success, error });
   },
-  viewMovie: function () {
+  viewMovie: function ( id ) {
     const
       success = model => {
         const viewer = this.lanch( MovieViewer );
@@ -62,7 +62,7 @@ module.exports = {
         console.log('Cannot fetch data from the server!');
       };
 
-    (new MovieModel()).fetch({ success, error });
+    (new MovieModel({_id: id})).fetch({ success, error });
   },
   createMovie: function () {
     const
