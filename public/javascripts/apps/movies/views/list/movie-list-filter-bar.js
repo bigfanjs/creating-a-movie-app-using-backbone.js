@@ -3,7 +3,8 @@ import template from '../../templates/list/movie-filter-bar.pug';
 import $ from 'jquery';
 
 export default Layout.extend({
-  className: 'movie-filter-bar',
+  className: 'col-xs-3 well',
+  id: 'filter-bar',
   template: template,
   events: {
     'click #look-up': 'lookUp',
