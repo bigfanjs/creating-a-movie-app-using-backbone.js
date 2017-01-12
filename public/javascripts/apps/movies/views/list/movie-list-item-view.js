@@ -6,10 +6,10 @@ export default ModelView.extend({
   template,
   className: 'col-md-3',
   events: {
-    'click #movie-item': 'viewMovie'
+    'click .thumbnail': 'viewMovie'
   },
   viewMovie() {
     const id = this.model.get('_id');
-    App.router.navigate(`movies/view/:${ id }`, true);
+    App.router.navigate(`movies/view/${ id }`, true);
   }
 });
