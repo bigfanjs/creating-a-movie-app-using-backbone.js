@@ -15,7 +15,7 @@ export default function () {
       watch: [
         'server.js',
         'lib/**/*.js',
-        'routes/**/*/js',
+        'routes/**/*.js',
         'models/**/*.js',
         'views/**/*.jade'
       ]
