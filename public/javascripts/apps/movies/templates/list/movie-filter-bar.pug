@@ -1,35 +1,34 @@
-#filter-bar.col-xs-3.well
-  h3 BROWSE
-  form(role="search")
-    label(for="search") Search by title
-    .input-group.add-on
-      input#search.form-control(type="text" placeholder="movie title" name="title")
-      .input-group-btn
-        button#look-up.btn.btn-default(type="submit")
-          i.glyphicon.glyphicon-search
-    br
-    ul.list-group
-      li.list-group-item Popular
-      li.list-group-item Action
-      li.list-group-item Adventure
-      li.list-group-item Animation
-      li.list-group-item Comedy
-      li.list-group-item Drama
-      li.list-group-item Horror
-    .form-group
-      label(for="sort") Sort By:
-      select#order.form-control
-        option(value="popularity") Popularity
-        option(value="year") Release Year
-        option(value="title") Title
-    .form-group
-      label(for="year")
-      div
-        #year.row
-          .col-sm-2: div 2016
-          .col-sm-2: div 2015
-          .col-sm-2: div 2014
-          .col-sm-2: div 2013
-          .col-sm-2: div 2012
-          .col-sm-2: div 2011
-          .col-sm-2: div 2010
+h3 BROWSE
+form(role="search")
+  label(for="search") Search by title
+  .input-group.add-on
+    input#search.form-control(type="text" placeholder="movie title" name="title")
+    .input-group-btn
+      button#look-up.btn.btn-default(type="submit")
+        i.glyphicon.glyphicon-search
+  br
+  ul.list-group
+    li.list-group-item Popular
+    li.list-group-item Action
+    li.list-group-item Adventure
+    li.list-group-item Animation
+    li.list-group-item Comedy
+    li.list-group-item Drama
+    li.list-group-item Horror
+  .form-group
+    label(for="sort") Sort By:
+    select#order.form-control
+      option(value="popularity") Popularity
+      option(value="year") Release Year
+      option(value="title") Title
+  .form-group
+    label(for="year")
+    div
+      #year.row
+        .col-sm-2: div 2016
+        .col-sm-2: div 2015
+        .col-sm-2: div 2014
+        .col-sm-2: div 2013
+        .col-sm-2: div 2012
+        .col-sm-2: div 2011
+        .col-sm-2: div 2010
