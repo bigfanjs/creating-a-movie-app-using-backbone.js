@@ -10,6 +10,7 @@ export default BasicModel.extend({
     overview: '',
     director: '',
     boxOffice: '',
+    budget: '',
     country: '',
     language: '',
     cast: [{
