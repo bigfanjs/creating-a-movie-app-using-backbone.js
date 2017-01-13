@@ -1,9 +1,43 @@
-.panel-heading= title
-.panel-body
-  #movie-info
-    #story
-      h4 Story
-      p Lorem ipsum dolor sit amet, consectetur adipisicium.
-    #actors
-      ul.list-group
-        li.list-item-group
+.panel.panel-simple
+  .panel-heading= title + '(' + releaseDate +')'
+  .panel-body
+    #movie-info
+      #movie-overview
+        h4 Overview
+        p= overview
+      h4 Movie Information
+      dl.dl-horizontal
+        dt Genre
+        dd= genre
+        dt Release Date
+        dd= releaseDate
+        dt Running Time
+        dd= runningTime
+        dt Director
+        dd= director
+        dt Country
+        dd= country
+        dt Language
+        dd= language
+        dt Budget
+        dd= budget
+        dt Box Office
+        dd= boxOffice
+  .panel-heading Starring
+  .panel-body
+    table.table.table-striped
+      thead
+        tr
+          th Picture
+          th Actor Name
+          th Character Name
+      tbody.starring-list-container
+  .panel-heading Cast
+  .panel-body
+    table.table.tabel-striped
+      thead
+        tr
+          th Picture
+          th Actor Name
+          th Character Name
+      tbody.cast-list-container
