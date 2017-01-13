@@ -9,6 +9,7 @@ module.exports = function (mongoose, db) {
     overview: String,
     director: String,
     boxOffice: String,
+    budget: String,
     country: String,
     language: String,
     cast: [{
