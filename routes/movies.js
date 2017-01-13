@@ -193,8 +193,8 @@ exports.uploadAvatars = function (dir, req, res, next) {
       }
 
       actor.avatar = {
-        file: file.filename,
-        url: '/images/avatars/' + file.filename
+        file: filename,
+        url: '/images/avatars/' + filename
       };
 
       const promise = new Promise((resolve, reject) => {
