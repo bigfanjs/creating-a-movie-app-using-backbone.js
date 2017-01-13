@@ -6,11 +6,9 @@ module.exports = function (mongoose, db) {
     genre: String,
     runningTime: String,
     releaseDate: String,
-    featureSong: String,
     overview: String,
-    directore: String,
+    director: String,
     boxOffice: String,
-    narrator: String,
     country: String,
     language: String,
     cast: [{
@@ -20,7 +18,8 @@ module.exports = function (mongoose, db) {
         file: String,
         url: String
       },
-      star: Boolean
+      star: Boolean,
+      gender: String
     }],
     cover: {
       file: String,
