@@ -1,10 +1,18 @@
 body {
-  padding-top: 70px;
+  padding-top: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.movie-list-view {
+.with-margin-top {
+  margin-top: 60px;
+}
+
+.movie-list-view .panel {
   background-color: #303030;
+}
+
+.movie-list-view .thumbnail {
+  cursor: pointer;
 }
 
 #filter-bar {
