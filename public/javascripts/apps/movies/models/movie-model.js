@@ -16,8 +16,9 @@ export default BasicModel.extend({
     cast: [{
       actor: '',
       character: '',
+      star: '',
+      gender: '',
       avatar: null,
-      star: ''
     }],
     meta: {
       dateAdded: '',
