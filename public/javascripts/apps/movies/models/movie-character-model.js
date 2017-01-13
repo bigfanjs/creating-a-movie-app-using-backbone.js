@@ -4,7 +4,8 @@ export default BasicModel.extend({
   defaults: {
     actor: '',
     character: '',
-    starring: '',
+    star: '',
+    gender: '',
     avatar: null
   }
 });
