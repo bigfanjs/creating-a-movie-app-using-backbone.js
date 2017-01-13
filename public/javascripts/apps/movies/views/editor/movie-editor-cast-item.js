@@ -3,6 +3,37 @@ import ModelView from '../../../../lib/model-view';
 import template from '../../templates/editor/movie-editor-cast-item.pug';
 
 export default ModelView.extend({
+  initialize() {
+    this.bindings = {};
+
+    const attrs = Object.keys(this.model.attributes);
+
+    attrs.forEach(attr => {
+      if (attr === 'avatar') { return; }
+
+      const selector = `#${ attr }-input`;
+
+      if (attr === 'gender') {
+        this.bindings[selector] = {
+          observe: attr,
+          selectOptions: {
+            collection: [
+              { option: 'Male', value: 'm' },
+              { option: 'Female', value: 'f' }
+            ],
+            labelPath: 'option',
+            valuePath: 'value',
+            defaultOption: {
+              label: 'Gender',
+              value: null
+            }
+          }
+        };
+      } else {
+        this.bindings[selector] = attr;
+      }
+    });
+  },
   template,
   className: 'form-group',
   events: {
