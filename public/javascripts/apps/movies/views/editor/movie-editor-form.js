@@ -1,6 +1,33 @@
 import Layout from '../../../../lib/layout';
 import template from '../../templates/editor/movie-editor-form.pug';
 
+const collections = {
+  genre: [
+    'Action',
+    'Drama',
+    'Comedy',
+    'Adventure',
+    'Romance'
+  ],
+  country: [
+    'America',
+    'England',
+    'France',
+    'China',
+    'Germany',
+    'India',
+    'Spain'
+  ],
+  language: [
+    'English',
+    'Frensh',
+    'Chinese',
+    'German',
+    'Indian',
+    'Spanish'
+  ]
+};
+
 export default Layout.extend({
   initialize() {
     this.bindings = {};
@@ -10,12 +37,33 @@ export default Layout.extend({
     keys.splice(keys.indexOf('_id'), 1);
 
     keys.forEach((key, value) => {
-      if (!Array.isArray( value )) {
-        this.bindings[`input#${ key }-input`] = key;
-      }
-    });
+      if (Array.isArray( value )) { return; }
 
-    keys.splice(keys.indexOf('_id'), 1);
+      var arr;
+
+      const selector = `#${ key }-input`;
+
+      if (Array.isArray(arr = collections[key])) {
+        const collection = arr.map(item => {
+          return { option: item, value: item.toLowerCase() };
+        });
+
+        this.bindings[selector] = {
+          observe: key,
+          selectOptions: { collection,
+            labelPath: 'option',
+            valuePath: 'value',
+            defaultOption: {
+              label: '',
+              value: null
+            }
+          }
+        };
+      } else {
+        this.bindings[selector] = key;
+      }
+
+    });
   },
   template,
   className: 'col-xs-12 col-sm-8 col-md-9',
