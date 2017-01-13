@@ -5,24 +5,36 @@
       #movie-overview
         h4 Overview
         p= overview
-      h4 Movie Information
-      dl.dl-horizontal
-        dt Genre
-        dd= genre
-        dt Release Date
-        dd= releaseDate
-        dt Running Time
-        dd= runningTime
-        dt Director
-        dd= director
-        dt Country
-        dd= country
-        dt Language
-        dd= language
-        dt Budget
-        dd= budget
-        dt Box Office
-        dd= boxOffice
+      table.table
+        thead
+          tr
+            th(colspan=2) Movie Information
+        tbody
+          tr
+            td Genre
+            td= genre
+          tr
+            td Release Date
+            td= releaseDate
+          tr
+            td Running Time
+            td= runningTime
+          tr
+            td Director
+            td= director
+          tr
+            td Country
+            td= country
+          tr
+            td Language
+            td= language
+          tr
+            td Budget
+            td= budget
+          tr
+            td Box Office
+            td= boxOffice
+.panel.panel-simple
   .panel-heading Starring
   .panel-body
     table.table.table-striped
@@ -32,6 +44,7 @@
           th Actor Name
           th Character Name
       tbody.starring-list-container
+.panel.panel-simple
   .panel-heading Cast
   .panel-body
     table.table.tabel-striped
@@ -41,3 +54,6 @@
           th Actor Name
           th Character Name
       tbody.cast-list-container
+  .panel-footer.clearfix
+    .panel-buttons
+      button#cancel.btn.btn-default Go Back
