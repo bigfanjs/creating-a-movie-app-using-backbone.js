@@ -11,8 +11,16 @@ body {
   background-color: #303030;
 }
 
-.movie-list-view .thumbnail {
+.movie-list-view .  {
   cursor: pointer;
+}
+
+#movie-viewer-widget .thumbnail .caption {
+  overflow: hidden;
+}
+
+#star-icon {
+  color: orange;
 }
 
 #filter-bar {
@@ -103,11 +111,17 @@ span.notice {
   width:100%;
 }
 .avatar-img-container:hover i {
-  top: 0;
+  background: rgba(0,0,0,.3);
+  display: block;
   position: absolute;
-  left: 0;
-  right: 0;
+  top: 0;
   opacity: 1;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  padding-top: 15px;
 }
 .avatar-img-container i {
   background:rgba(0,0,0,0.3);
@@ -120,10 +134,13 @@ span.notice {
   right: 0;
   text-align: center;
   color: #fff;
-  border-radius: 50px;
 }
 
 #movie-cast-container .form-group {
   display: flex;
   align-items: center;
+}
+
+.panel-heading > h4#title {
+  padding-top: 10px;
 }
