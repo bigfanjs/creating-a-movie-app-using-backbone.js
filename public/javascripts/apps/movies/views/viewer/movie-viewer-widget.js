@@ -3,5 +3,5 @@ import template from '../../templates/viewer/movie-viewer-widget.pug';
 
 export default ModelView.extend({
   template,
-  className: 'movie-viewer-widget'
+  className: 'col-xs-12 col-sm-4 col-md-3'
 });
