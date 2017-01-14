@@ -67,6 +67,20 @@ const
     this.avatars[ id ] = avatar;
   },
   save = function ( movie ) {
+    if (!movie.isValid(true)) {
+      console.error('Movie is not valid!');
+      return;
+    }
+
+    const valids = this.castCollection.map(model => {
+      return model.isValid(true);
+    });
+
+    if (valids.includes(false)) {
+      console.error('Cast is not valid!');
+      return;
+    }
+
     const cast = this.castCollection.toJSON();
 
     movie.set({ cast });
@@ -120,14 +134,15 @@ export default {
 
     return ctrl;
   },
-  view: function ( model ) {
-    const cast = model.get('cast') || [];
+  view: function ( movie ) {
+    const cast = movie.get('cast') || [];
 
     this.castCollection = new MovieCharCollection( cast );
+
     const
       layout = new MovieEditorLayout(),
-      form = new MovieEditorForm({ model }),
-      preview = new MovieEditorPreview({ model }),
+      form = new MovieEditorForm({model: movie}),
+      preview = new MovieEditorPreview({model: movie}),
       castList = new MovieEditorCastView({
         collection: this.castCollection
       });

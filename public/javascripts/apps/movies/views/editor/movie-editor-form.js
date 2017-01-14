@@ -1,3 +1,4 @@
+import Backbone from 'backbone';
 import Layout from '../../../../lib/layout';
 import template from '../../templates/editor/movie-editor-form.pug';
 
@@ -85,13 +86,7 @@ export default Layout.extend({
   addActor: function () {
     this.trigger('cast:add', true);
   },
-  getInput: function ( selector ) {
-    const elem = this.$el.find( selector ); 
-
-    if (!elem) {
-      return null;
-    }
-
-    return elem.val();
+  onRender: function () {
+    Backbone.Validation.bind(this);
   }
 });

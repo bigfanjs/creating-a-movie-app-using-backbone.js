@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Backbone from 'backbone';
 import ModelView from '../../../../lib/model-view';
 import template from '../../templates/editor/movie-editor-cast-item.pug';
 
@@ -73,5 +74,8 @@ export default ModelView.extend({
 
     fileReader.readAsDataURL( selectedFile );
     this.trigger('avatar:select', [selectedFile, index]);
+  },
+  onRender() {
+    Backbone.Validation.bind(this);
   }
 });

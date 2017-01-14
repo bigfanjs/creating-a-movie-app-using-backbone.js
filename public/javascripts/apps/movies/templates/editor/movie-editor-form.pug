@@ -22,7 +22,9 @@
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="runningTime") Running Time
         .col-xs-6.col-sm-9.col-md-11
-          input#runningTime-input.form-control(type="text")
+          .input-group
+            input#runningTime-input.form-control(type="number" max="200" min="30")
+            span.input-group-addon minutes
       .form-group
         label.control-label.col-xs-6.col-sm-3.col-md-1(for="director") Director
         .col-xs-6.col-sm-9.col-md-11

@@ -7,5 +7,17 @@ export default BasicModel.extend({
     star: '',
     gender: '',
     avatar: null
+  },
+  validation: {
+    actor: {
+      required: true
+    },
+    character: {
+      required: true
+    },
+    gender: {
+      required: true,
+      msg: 'Select a gender'
+    }
   }
 });

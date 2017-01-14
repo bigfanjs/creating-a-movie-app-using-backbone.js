@@ -27,6 +27,41 @@ export default BasicModel.extend({
     },
     cover: null
   },
+  validation: {
+    title: {
+      required: true,
+      minLength: 1
+    },
+    overview: {
+      required: true,
+      maxLength: 124,
+      minLength: 60
+    },
+    genre: {
+      required: true
+    },
+    runningTime: {
+      required: true,
+      max: 200,
+      min: 30
+    },
+    releaseDate: [
+      {
+        required: true,
+        msg: 'release date is required'
+      },
+      {
+        pattern: 'date',
+        msg: 'invalid date'
+      }
+    ],
+    language: {
+      required: true
+    },
+    country: {
+      required: true
+    }
+  },
   uploadCover: function (blob, options) {
     this.upload(blob, 'cover', options);
   },
