@@ -5,6 +5,7 @@ const
   path = require('path'),
   crispy = require('crispy-string'),
   has = require('lodash/has'),
+  forEach = require('lodash/forEach'),
   Movie = require('../models')('movie');
 
 const send404 = function (res, err) {
@@ -29,10 +30,29 @@ exports.showMovies = function (req, res) {
     res.status(200).json( movies );
   };
 
-  if (req.session.uid) {
-    Movie.find({}, callback);
+  if (false && req.session.uid && req.query.admin) {
+    return;
   } else {
-    Movie.find({}, {meta: 0}, callback);
+    const
+      query = req.query,
+      sort = query.sort;
+
+    forEach(query, (value, key) => {
+      if (!value.length || key === 'sort') {
+        delete query[ key ];
+      }
+
+      if (key === 'releaseYear' && value.length) {
+        delete query[ key ];
+        query['releaseDate.year'] = value;
+      }
+    });
+
+    Movie
+      .find(query)
+      .sort(sort=='year'?'releaseDate.year':sort)
+      .select({meta: 0})
+      .exec(callback);
   }
 };
 
