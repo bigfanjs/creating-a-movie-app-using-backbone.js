@@ -10,7 +10,12 @@ export default function () {
 
     return nodemon({
       script: '../build/server.js',
-      ignore: ['gulpfile.babel.js', '.babelrc', '/node_modules/'],
+      ignore: [
+        'gulpfile.babel.js',
+        '.babelrc',
+        '/node_modules/',
+        '/public/'
+      ],
       tasks: ['node-babel'],
       watch: [
         'server.js',
