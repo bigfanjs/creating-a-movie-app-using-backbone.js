@@ -67,17 +67,14 @@ const
     this.avatars[ id ] = avatar;
   },
   save = function ( movie ) {
-    if (!movie.isValid(true)) {
-      console.error('Movie is not valid!');
-      return;
-    }
+    const isValid = !movie.isValid(true);
 
     const valids = this.castCollection.map(model => {
       return model.isValid(true);
     });
 
-    if (valids.includes(false)) {
-      console.error('Cast is not valid!');
+    if (isValid || valids.includes(false)) {
+      console.error('the form is not valid!');
       return;
     }
 
