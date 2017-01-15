@@ -6,7 +6,11 @@ export default BasicModel.extend({
     title: '',
     genre: '',
     runningTime: '',
-    releaseDate: '',
+    releaseDate: {
+      month: '',
+      day: '',
+      year: ''
+    },
     overview: '',
     director: '',
     boxOffice: '',
