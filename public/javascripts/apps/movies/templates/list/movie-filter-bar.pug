@@ -1,34 +1,32 @@
 h3 BROWSE
-form(role="search")
+form(role="search" action="/api/movies")
   label(for="search") Search by title
   .input-group.add-on
     input#search.form-control(type="text" placeholder="movie title" name="title")
     .input-group-btn
       button#look-up.btn.btn-default(type="submit")
         i.glyphicon.glyphicon-search
+  hr(width="100%")
+form#filter-form
+  label Genre:
+  select#genre-input.form-control(name="genre" multiple size=7)
+    option(value="popular") Popular
+    option(value="action") Action
+    option(value="adventure") Adventure
+    option(value="animation") Animation
+    option(value="comedy") Comedy
+    option(value="drama") Drama
+    option(value="horror") Horror
   br
-  ul.list-group
-    li.list-group-item Popular
-    li.list-group-item Action
-    li.list-group-item Adventure
-    li.list-group-item Animation
-    li.list-group-item Comedy
-    li.list-group-item Drama
-    li.list-group-item Horror
   .form-group
     label(for="sort") Sort By:
-    select#order.form-control
-      option(value="popularity") Popularity
+    select#sort-input.form-control(name="sort")
+      option(value="popularity" selected) Popularity
       option(value="year") Release Year
       option(value="title") Title
   .form-group
-    label(for="year")
-    div
-      #year.row
-        .col-sm-2: div 2016
-        .col-sm-2: div 2015
-        .col-sm-2: div 2014
-        .col-sm-2: div 2013
-        .col-sm-2: div 2012
-        .col-sm-2: div 2011
-        .col-sm-2: div 2010
+    label(for="release-year") Release Year:
+    input#release-year.form-control(name="releaseYear" type="number" min="1980" max="2017")
+  .btn-group
+    input#filter.btn.btn-primary(type="submit" value="Filter")
+    input#clear.btn.btn-default(type="reset" value="Clear")
