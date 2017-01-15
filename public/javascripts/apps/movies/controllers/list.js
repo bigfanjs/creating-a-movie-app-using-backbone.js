@@ -7,6 +7,7 @@
   MovieListItemView = require('../views/list/movie-list-item-view'),
   MovieListView = require('../views/list/movie-list-view');*/
 
+import $ from 'jquery';
 import Backbone from 'backbone';
 import MovieListLayout from '../views/list/movie-list-layout';
 import MovieListFilterBar from '../views/list/movie-list-filter-bar';
@@ -43,6 +44,19 @@ export default {
       layout
         .getRegion('list')
         .show( list );
+    });
+    this.listenTo(filter, 'filter', function ( queryString ) {
+      $.get('/api/movies?' + queryString)
+        .done(data => {
+          const list = new MovieListView({
+            collection: new Backbone.Collection( data )
+          });
+
+          layout.getRegion('list').show( list );
+        })
+        .fail(err => {
+          console.error( err );
+        });
     });
   },
   destroy: function () {
