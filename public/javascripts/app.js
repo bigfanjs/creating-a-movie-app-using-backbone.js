@@ -108,7 +108,7 @@ assign(Backbone.Validation.callbacks, {
 
 // MM/DD/YYYY
 assign(Backbone.Validation.patterns, {
-  date: /^(\d{2})\/(\d{2})\/(\d{4})$/
+  date: /^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-](\d{4})$/
 });
 
 assign(Backbone.Validation.messages, {
