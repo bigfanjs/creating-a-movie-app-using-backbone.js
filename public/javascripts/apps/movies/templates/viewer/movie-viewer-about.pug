@@ -1,7 +1,7 @@
 .panel.panel-simple
   .panel-heading.clearfix
     h4#title.panel-title.pull-left
-      strong= title + '(' + releaseDate +')'
+      strong= title + '(' + releaseDate.year +')'
     .btn-group.pull-right
       a(href="#").btn.btn-primary Watch Movie
       a(href="#").btn.btn-default Watch Trailer
@@ -19,7 +19,7 @@
             td= genre
           tr
             td Release Date
-            td= releaseDate
+            td#release-date= releaseDate
           tr
             td Running Time
             td= runningTime
