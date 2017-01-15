@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import values from 'lodash/values';
 import Layout from '../../../../lib/layout';
 import template from '../../templates/editor/movie-editor-form.pug';
 
@@ -59,6 +60,28 @@ export default Layout.extend({
               value: null
             }
           }
+        };
+      } else if (key === 'releaseDate') {
+        this.bindings[selector] = {
+          observe: key,
+          onSet(string) {
+            const
+              result = {},
+              date = Object.keys(this.model.get(key)),
+              vals = string.split('/');
+
+            date.forEach((ymd, idx) => {
+              const val = vals[ idx ];
+              result[ ymd ] = val;
+            });
+
+            return result;
+          },
+          onGet(obj) {
+            const vals = values( obj );
+            return vals.join('/');
+          },
+          updateView: !this.model.isNew()
         };
       } else {
         this.bindings[selector] = key;
