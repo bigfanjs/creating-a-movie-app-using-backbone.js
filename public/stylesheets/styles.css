@@ -9,10 +9,16 @@ body {
 
 .movie-list-view .panel {
   background-color: #303030;
+  height: 800px;
 }
 
-.movie-list-view .  {
+.movie-list-view .thumbnail {
   cursor: pointer;
+  height: 270px;
+}
+
+.movie-list-view .thumbnail h4 {
+  font-size: 1.3vw;
 }
 
 #movie-viewer-widget .thumbnail .caption {
@@ -27,12 +33,18 @@ body {
   margin-right: 20px;
 }
 
-/*.btn span.glyphicon {         
-  opacity: 0;       
+#filter-bar #year > span:hover {
+  background-color: #fff;
+  color: #303030;
 }
-.btn.active span.glyphicon {        
-  opacity: 1;       
-}*/
+
+#filter-bar #year > span h5 {
+   margin: 5px; 
+}
+
+#filter-bar hr {
+  border-color: #cac6c6;
+}
 
 #search, #search-box button {
   border-radius: 0;
