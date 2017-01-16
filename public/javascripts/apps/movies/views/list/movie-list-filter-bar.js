@@ -8,11 +8,17 @@ export default Layout.extend({
   template: template,
   events: {
     'click #look-up': 'lookUp',
-    'click #type': 'type',
-    'click #sort': 'sort'
+    'click #filter': 'filter'
   },
   lookUp: function ( e ) {
     e.preventDefault();
-    this.trigger('look-up', $('#search').val());
+    this.trigger('lookup', $('#search').val());
+  },
+  filter( e ) {
+    e.preventDefault();
+
+    const search = this.$('#filter-form').serialize();
+
+    this.trigger('filter', search);
   }
 });
