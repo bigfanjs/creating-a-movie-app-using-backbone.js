@@ -11,7 +11,6 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import MovieListLayout from '../views/list/movie-list-layout';
 import MovieListFilterBar from '../views/list/movie-list-filter-bar';
-import MovieListItemView from '../views/list/movie-list-item-view';
 import MovieListView from '../views/list/movie-list-view';
 
 export default {

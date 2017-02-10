@@ -1,5 +1,3 @@
-import Backbone from 'backbone';
-import forEach from 'lodash/forEach';
 import MoviesApp from './index';
 import App from '../../app';
 import BaseRouter from '../../lib/base-router';
@@ -14,7 +12,7 @@ export default BaseRouter.extend({
         this.porformAuth()
           .fail((err) => {
             this.navigate('admin/login', true);
-            reject();
+            reject(err);
           })
           .done(() => { resolve(); });
       });
@@ -22,7 +20,6 @@ export default BaseRouter.extend({
   },
   routes: {
     'movies': 'displayMovies',
-    'movies/page/:page': 'displayMovies',
     'movies/view/:id': 'viewMovie',
     'movies/edit/:id': 'editMovie',
     'movies/new': 'createMovie',

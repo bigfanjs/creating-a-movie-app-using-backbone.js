@@ -24,10 +24,12 @@ export default BasicModel.extend({
       gender: '',
       avatar: null,
     }],
+    createdAt: '',
+    updatedAt: '',
     meta: {
-      dateAdded: '',
-      favorites: '',
-      watches: ''
+      likes: 0,
+      disLikes: 0,
+      watches: 0
     },
     cover: null
   },

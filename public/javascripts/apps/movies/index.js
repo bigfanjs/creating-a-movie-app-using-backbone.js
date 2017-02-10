@@ -36,7 +36,7 @@ module.exports = {
 
     return app;
   },
-  viewList: function () {
+  viewList: function ( page ) {
     const
       success = collection => {
         const list = this.lanch( MovieList );
@@ -48,7 +48,7 @@ module.exports = {
         console.log('Cannot fetch data from the server!');
       };
 
-    (new MovieCollection()).fetch({ success, error });
+    (new MovieCollection({ page })).fetch({ success, error });
   },
   viewMovie: function ( id ) {
     const
@@ -85,8 +85,8 @@ module.exports = {
       }
     });
   },
-  viewDashboard: function () {
-    const movieCollection = new MovieCollection();
+  viewDashboard: function (page) {
+    const movieCollection = new MovieCollection({ page });
 
     movieCollection.fetch({
       success: collection => {

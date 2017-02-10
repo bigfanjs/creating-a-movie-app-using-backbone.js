@@ -1,12 +1,10 @@
-td
-  img.img-responsive(width="55px" height="90px" src=cover.url)
+td: img.img-responsive(width="55px" height="90px" src=cover.url)
 td= title
-td= meta.dateAdded
+td= createdAt
+td= updatedAt
 td= meta.watches
-td= meta.favorites
-td
-  canvas(width="200" height="100")
+td= meta.likes
 td
   div.btn-group
-    button.btn.btn-default Edit
-    button.btn.btn-default Delete
+    button#edit.btn.btn-primary Edit
+    button#delete.btn.btn-default Delete

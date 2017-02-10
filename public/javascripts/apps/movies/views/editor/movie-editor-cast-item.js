@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import Backbone from 'backbone';
 import ModelView from '../../../../lib/model-view';
 import template from '../../templates/editor/movie-editor-cast-item.pug';
@@ -10,8 +9,6 @@ export default ModelView.extend({
     const attrs = Object.keys(this.model.attributes);
 
     attrs.forEach(attr => {
-      if (attr === 'avatar') { return; }
-
       const selector = `#${ attr }-input`;
 
       if (attr === 'gender') {
@@ -30,6 +27,16 @@ export default ModelView.extend({
             }
           }
         };
+      } else if (attr === 'avatar') {
+        this.bindings[selector] = {
+          attributes: [{
+            name: 'src',
+            observe: attr,
+            onGet(avatar) {
+              return avatar ? avatar.url : '/images/actor.png';
+            }
+          }]
+        };
       } else {
         this.bindings[selector] = attr;
       }
@@ -41,11 +48,6 @@ export default ModelView.extend({
     'click a#delete': 'deleteActor',
     'click i': 'selectFileDialog',
     'change #avatar-input': 'handleAvatarSelect'
-  },
-  bindings: {
-    '#actor-input': 'actor',
-    '#char-input': 'character',
-    '#starring-input': 'starring'
   },
   selectFileDialog() {
     this.$('#avatar-input').trigger('click');

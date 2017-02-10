@@ -9,6 +9,11 @@ export default ModelView.extend({
     'click #delete': 'removeMovie',
     'click #edit': 'editMovie'
   },
-  removeMovie: function () {},
-  editMovie: function () {},
+  removeMovie: function () {
+    this.trigger('delete:movie', this.model);
+  },
+  editMovie: function () {
+    const id = this.model.get('_id');
+    App.router.navigate(`movies/edit/${id}`, true);
+  },
 });

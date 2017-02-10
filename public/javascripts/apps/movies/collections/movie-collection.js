@@ -7,7 +7,11 @@ export default Backbone.Collection.extend({
     this.page = options.page;
   },
   url: function () {
-    return '/api/movies/' + this.page;
+    const
+      page = this.page,
+      query = typeof page !== 'undefined' ? '?page=' + this.page : '';
+
+    return '/api/movies' + query;
   },
   model: MovieModel
 });

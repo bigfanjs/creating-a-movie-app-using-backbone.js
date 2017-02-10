@@ -59,6 +59,7 @@ app.get('/session', isAuth, function (req, res) {
 });
 
 app.get('/api/movies/', movies.showMovies);
+app.get('/api/movies/count', movies.count);
 app.get('/api/movies/:id', movies.viewMovie);
 app.post('/api/movies/', isAuth, movies.createMovie);
 app.put('/api/movies/:id', isAuth, movies.updateMovie);

@@ -37,6 +37,17 @@ export default {
         .getRegion('list')
         .show( list );
     });
+
+    this.listenTo(list, 'item:delete:movie', function (view, movie) {
+      movie.destroy({
+        success() {
+          console.log('Successfully removed movie');
+        },
+        error( err ) {
+          console.error( err );
+        }
+      });
+    });
   },
   destroy: function () {
     this.region.remove();

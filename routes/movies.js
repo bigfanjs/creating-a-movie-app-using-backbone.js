@@ -24,36 +24,39 @@ const
   };
 
 exports.showMovies = function (req, res) {
-  const callback = function (err, movies) {
-    if ( err ) { return send404(res, err); }
+  const
+    perPage = 16,
+    page = Math.max(0, parseInt(req.query.page) - 1),
+    callback = function (err, movies) {
+      if ( err ) { return send404(res, err); }
 
-    res.status(200).json( movies );
-  };
+      res.status(200).json( movies );
+    };
 
-  if (false && req.session.uid && req.query.admin) {
-    return;
-  } else {
-    const
-      query = req.query,
-      sort = query.sort;
+  const
+    query = req.query,
+    sort = query.sort;
 
-    forEach(query, (value, key) => {
-      if (!value.length || key === 'sort') {
-        delete query[ key ];
-      }
+  forEach(query, (value, key) => {
+    if (!value.length || key === 'sort' || key === 'page') {
+      delete query[ key ];
+    }
+  });
 
-      if (key === 'releaseYear' && value.length) {
-        delete query[ key ];
-        query['releaseDate.year'] = value;
-      }
-    });
+  Movie
+    .find(query, req.session.uid ? '' : '-meta')
+    .limit(perPage)
+    .skip(page*perPage)
+    .sort(sort)
+    .exec(callback);
+};
 
-    Movie
-      .find(query)
-      .sort(sort=='year'?'releaseDate.year':sort)
-      .select({meta: 0})
-      .exec(callback);
-  }
+exports.count = function (req, res, next) {
+  Movie.count().exec((err, count) => {
+    if (err) { return next(); }
+
+    res.json(count);
+  });
 };
 
 exports.viewMovie = function (req, res) {
