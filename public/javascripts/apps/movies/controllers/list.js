@@ -12,6 +12,7 @@ import Backbone from 'backbone';
 import MovieListLayout from '../views/list/movie-list-layout';
 import MovieListFilterBar from '../views/list/movie-list-filter-bar';
 import MovieListView from '../views/list/movie-list-view';
+import MoviePagBar from '../views/list/movie-pag-bar';
 
 export default {
   setup: function (options = {}) {
@@ -30,6 +31,18 @@ export default {
     this.region.show( layout );
     layout.getRegion('filters').show( filter );
     layout.getRegion('list').show( list );
+
+    $.get('/api/movies/count')
+      .done(data => {
+        const pagBar = new MoviePagBar({
+          number: Math.ceil(data/16)
+        });
+
+        layout.getRegion('page').show(pagBar);
+      })
+      .fail(err => {
+        console.error(err);
+      });
 
     this.listenTo(filter, 'lookup', function (title) {
       const

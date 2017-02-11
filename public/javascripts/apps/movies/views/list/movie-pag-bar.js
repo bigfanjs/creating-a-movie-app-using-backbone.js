@@ -1,7 +1,7 @@
 import CollectionView from '../../../../lib/collection-view';
-import ItemView from './movie-list-item-view';
+import ItemView from './movie-pag-bar-item';
 
 export default CollectionView.extend({
-  className: 'row',
+  className: 'pull-right btn-group',
   ItemView
 });

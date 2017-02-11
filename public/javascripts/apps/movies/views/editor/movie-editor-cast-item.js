@@ -47,10 +47,10 @@ export default ModelView.extend({
   events: {
     'click a#delete': 'deleteActor',
     'click i': 'selectFileDialog',
-    'change #avatar-input': 'handleAvatarSelect'
+    'change #file-input': 'handleAvatarSelect'
   },
   selectFileDialog() {
-    this.$('#avatar-input').trigger('click');
+    this.$('#file-input').trigger('click');
   },
   deleteActor( e ) {
     e.preventDefault();
@@ -63,9 +63,9 @@ export default ModelView.extend({
     e.preventDefault();
 
     const
-      img = this.$('#img-avatar'),
+      img = this.$('#avatar-input'),
       index = this.$(e.target).closest('.form-group').index(),
-      selectedFile = this.$('#avatar-input')[0].files[0],
+      selectedFile = this.$('#file-input')[0].files[0],
       fileReader = new FileReader();
 
     fileReader.onload = function ( event ) {

@@ -29,10 +29,6 @@ body {
   color: orange;
 }
 
-#filter-bar {
-  margin-right: 20px;
-}
-
 #filter-bar #year > span:hover {
   background-color: #fff;
   color: #303030;

@@ -19,7 +19,7 @@ export default BaseRouter.extend({
     }
   },
   routes: {
-    'movies': 'displayMovies',
+    'movies/page/:id': 'displayMovies',
     'movies/view/:id': 'viewMovie',
     'movies/edit/:id': 'editMovie',
     'movies/new': 'createMovie',
@@ -46,6 +46,6 @@ export default BaseRouter.extend({
     this.navigate('admin/dashboard', true);
   },
   defaultRoute: function () {
-    this.navigate('movies', true);
+    this.navigate('movies/page/1', true);
   }
 });

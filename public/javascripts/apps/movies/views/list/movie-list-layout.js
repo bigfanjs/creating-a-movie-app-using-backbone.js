@@ -6,6 +6,7 @@ export default Layout.extend({
   className: 'row page-container',
   regions: {
     filters: '.movie-filter-bar',
-    list: '.movie-list-view'
+    list: '.movie-list-view',
+    page: '.movie-list-pag-bar'
   }
 });

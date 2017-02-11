@@ -55,7 +55,7 @@ const
 
       this.closeChildViews();
 
-      $html = this.collection.slice(0).map(model => {
+      $html = this.collection.map(model => {
         const view = renderModel.call(this, model, this.childViews);
 
         return view.$el;
@@ -71,7 +71,6 @@ const
     },
     closeChildViews() {
       const views = this.childViews || {};
-      // console.log('Ass', views);
 
       forEach(views, view => {
         this.closeChildView( view );
