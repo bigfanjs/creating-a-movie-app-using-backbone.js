@@ -5,11 +5,7 @@ module.exports = function (mongoose, db) {
     title: String,
     genre: String,
     runningTime: String,
-    releaseDate: {
-      month: String,
-      day: String,
-      year: String
-    },
+    releaseDate: Date,
     overview: String,
     director: String,
     boxOffice: String,
@@ -35,7 +31,7 @@ module.exports = function (mongoose, db) {
       disLikes: Number,
       watches: Number
     } 
-  }, { timestamps: true });
+  }, {timestamps: true});
 
   return db.model('movie', schema);
 };

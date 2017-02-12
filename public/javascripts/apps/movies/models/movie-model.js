@@ -6,11 +6,7 @@ export default BasicModel.extend({
     title: '',
     genre: '',
     runningTime: '',
-    releaseDate: {
-      month: '',
-      day: '',
-      year: ''
-    },
+    releaseDate: '',
     overview: '',
     director: '',
     boxOffice: '',
@@ -52,14 +48,8 @@ export default BasicModel.extend({
       min: 30
     },
     releaseDate: [
-      {
-        required: true,
-        msg: 'release date is required'
-      },
-      {
-        pattern: 'date',
-        msg: 'invalid date'
-      }
+      { required: true,
+        msg: 'release date is required' }
     ],
     language: {
       required: true

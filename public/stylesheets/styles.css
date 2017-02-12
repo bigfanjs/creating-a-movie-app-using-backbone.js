@@ -15,7 +15,11 @@ body {
 
 .movie-list-view .thumbnail {
   cursor: pointer;
-  height: 270px;
+  height: 316px;
+}
+
+#movies-list .thumbnail > img {
+  height: 265px;
 }
 
 .movie-list-view .thumbnail h4 {

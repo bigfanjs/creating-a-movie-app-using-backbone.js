@@ -1,20 +1,24 @@
-import values from 'lodash/values';
 import Layout from '../../../../lib/layout';
 import App from '../../../../app';
 import template from '../../templates/viewer/movie-viewer-about.pug';
 
 export default Layout.extend({
-  initialize() {
-    const
-      attr = 'releaseDate',
-      date = Object.keys(this.model.get(attr));
+  initialize(options) {
+    this.selectedPage = options.selectedPage;
 
     this.bindings = {
       '#release-date': {
-        observe: attr,
-        onGet: function ( obj ) {
-          const vals = values( obj );
-          return vals.join('/');
+        observe: 'releaseDate',
+        onGet: function (date) {
+          return new Date(date).toLocaleDateString();
+        }
+      },
+      '#title > strong': {
+        observe: ['releaseDate', 'title'],
+        onGet: function (values) {
+          const date = new Date(values[0]).getFullYear();
+
+          return values[1] + '('+ date +')';
         }
       }
     };
@@ -26,14 +30,15 @@ export default Layout.extend({
     starring: '.starring-list-container',
   },
   events: {
-    'click #back': 'back',
+    'click #goback': 'back',
     'click #watch-movie': 'watchMovie',
     'click #watch-trailer': 'watchTrailer',
     'click #like': 'like',
     'click #dislike': 'dislike'
   },
   back() {
-    App.router.navigate('movies', true);
+    const page = this.selectedPage;
+    App.router.navigate('movies/page/'+page, true);
   },
   watchMovie() {
     // handle movie watching here.

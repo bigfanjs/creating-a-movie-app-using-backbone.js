@@ -7,7 +7,7 @@ import Dashboard from './controllers/dashboard';
 import isFunction from 'lodash/isFunction';
 import bind from 'lodash/bind';
 
-var currCtrl;
+var currCtrl, selectedPage;
 
 function controller( region, Controller ) {
   /* if the controller we want to lanch is
@@ -41,6 +41,8 @@ module.exports = {
       success = collection => {
         const list = this.lanch( MovieList );
 
+        selectedPage = page;
+
         list.view(collection, page);
         console.log('Successfully fetch data from the server!');
       },
@@ -55,14 +57,14 @@ module.exports = {
       success = model => {
         const viewer = this.lanch( MovieViewer );
 
-        viewer.view( model );
+        viewer.view(model, selectedPage);
         console.log('Successfully fetch data from the server!');
       },
       error = () => {
         console.log('Cannot fetch data from the server!');
       };
 
-    (new MovieModel({_id: id})).fetch({ success, error });
+    (new MovieModel({_id: id})).fetch({success, error});
   },
   createMovie: function () {
     const

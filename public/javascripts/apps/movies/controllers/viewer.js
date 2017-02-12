@@ -30,7 +30,7 @@ module.exports = {
 
     return ctrl;
   },
-  view( movie ) {
+  view(movie, selectedPage) {
     const
       cast = movie.get('cast') || [],
       starring = cast.filter(actor => actor.star);
@@ -41,7 +41,7 @@ module.exports = {
     const
       layout = new MovieViewerLayout(),
       widget = new MovieViewerWidget({ model: movie }),
-      about = new MovieViewerAbout({ model: movie }),
+      about = new MovieViewerAbout({model: movie, selectedPage}),
       castList = new MovieCastView({
         collection: this.castCollection
       }),

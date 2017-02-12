@@ -64,22 +64,11 @@ export default Layout.extend({
       } else if (key === 'releaseDate') {
         this.bindings[selector] = {
           observe: key,
-          onSet(string) {
-            const
-              result = {},
-              date = Object.keys(this.model.get(key)),
-              vals = string.split('/');
-
-            date.forEach((ymd, idx) => {
-              const val = vals[ idx ];
-              result[ ymd ] = val;
-            });
-
-            return result;
+          onSet(value) {
+            return new Date(value);
           },
-          onGet(obj) {
-            const vals = values( obj );
-            return vals.join('/');
+          onGet(date) {
+            return new Date(date).toLocaleDateString();
           },
           updateView: !this.model.isNew()
         };
