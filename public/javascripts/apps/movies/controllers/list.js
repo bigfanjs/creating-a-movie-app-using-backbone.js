@@ -22,7 +22,7 @@ export default {
 
     return ctrl;
   },
-  view: function ( collection ) {
+  view: function (collection, page) {
     const
       layout = new MovieListLayout(),
       filter = new MovieListFilterBar(),
@@ -33,10 +33,8 @@ export default {
     layout.getRegion('list').show( list );
 
     $.get('/api/movies/count')
-      .done(data => {
-        const pagBar = new MoviePagBar({
-          number: Math.ceil(data/16)
-        });
+      .done(count => {
+        const pagBar = new MoviePagBar({count, page});
 
         layout.getRegion('page').show(pagBar);
       })

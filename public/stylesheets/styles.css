@@ -7,9 +7,10 @@ body {
   margin-top: 60px;
 }
 
-.movie-list-view .panel {
-  background-color: #303030;
-  height: 800px;
+#movies-list {
+  padding: 10px;
+  background-color: #2e2e2e;
+  height: 1175px;
 }
 
 .movie-list-view .thumbnail {
@@ -151,4 +152,12 @@ span.notice {
 
 .panel-heading > h4#title {
   padding-top: 10px;
+}
+
+.movie-list-pag-bar > div {
+  margin-bottom: 60px;
+}
+
+#filter-bar hr {
+  border-color: #cac6c6;
 }

@@ -1,12 +1,27 @@
-import ModelView from '../../../../lib/model-view';
+import Backbone from 'backbone';
+import App from '../../../../app';
 
-export default ModelView.extend({
+export default Backbone.View.extend({
   tagName: 'a',
-  className: 'btn btn-default',
+  className: 'btn',
   events: {
-    'click #page': 'selectPage'
+    'click': 'selectPage'
   },
   selectPage(e) {
     e.preventDefault();
+    const page = this.model.get('page');
+    App.router.navigate(`movies/page/${page}`, true);
+  },
+  render() {
+    const {selectedPage, page} = this.model.attributes;
+
+    const className = selectedPage == page ?
+      'btn-primary' : 'btn-default';
+
+    this.$el
+      .text(page)
+      .addClass(className);
+
+    return this;
   }
 });

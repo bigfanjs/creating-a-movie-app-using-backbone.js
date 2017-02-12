@@ -41,7 +41,7 @@ module.exports = {
       success = collection => {
         const list = this.lanch( MovieList );
 
-        list.view( collection );
+        list.view(collection, page);
         console.log('Successfully fetch data from the server!');
       },
       error = () => {

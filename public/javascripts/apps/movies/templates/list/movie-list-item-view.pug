@@ -1,5 +1,5 @@
 .thumbnail
-  - var src = cover&&cover.url?cover.url:'images/default.jpg';
+  - var src = cover&&cover.url?cover.url:'/images/default.jpg';
   img.cover-image(src=src)
   .caption
     h4= title
