@@ -11,4 +11,7 @@
   * ProxyQuireify for isolating the modules under test by
   	Mocking dependencies.
 
-## Working on it...
+You cann see how it works on this video:
+https://youtu.be/OHQYF70suvI
+
+[![Alt Movie App](https://raw.githubusercontent.com/AdelJS/movie-app-ng1/master/public/images/vlcsnap-error242.png)](https://youtu.be/OHQYF70suvI)
