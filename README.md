@@ -8,7 +8,6 @@
   * MochaJS for writing unit tests.
   * Karma for running my tests.
   * BabelJS for compiling my Javascript files.
-  * WebDriverIO for end-to-end testing.
   * ProxyQuireify for isolating the modules under test by
   	Mocking dependencies.
 
